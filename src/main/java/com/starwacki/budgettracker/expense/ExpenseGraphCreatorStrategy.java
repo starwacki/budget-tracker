@@ -42,7 +42,7 @@ class ExpenseGraphCreatorStrategy {
     }
 
     private void addOnlyMoneyValuesToCategories(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData, Expense expense) {
-        if (isCategoryExist(graphData,expense))
+        if (!isCategoryExist(graphData,expense))
             putNewCategoryToGraph(graphData,expense);
         else
             addOnlyMoneyValueToCategory(graphData,expense);
