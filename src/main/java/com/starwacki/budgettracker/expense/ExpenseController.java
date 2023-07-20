@@ -33,9 +33,9 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndMonth(username,monthOrder));
     }
 
-    @PostMapping("/")
-    public ResponseEntity<?> addNewExpenseToUser(@RequestBody ExpenseDTO expenseDTO) {
-        expenseService.addNewExpenseToUser(expenseDTO);
+    @PostMapping("/{username}")
+    public ResponseEntity<?> addNewExpenseToUser(@RequestBody ExpenseDTO expenseDTO,@PathVariable String username) {
+        expenseService.addNewExpenseToUser(expenseDTO,username);
         return ResponseEntity.noContent().build();
     }
 

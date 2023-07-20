@@ -21,8 +21,10 @@ class ExpenseService {
                 .toList();
     }
 
-    void addNewExpenseToUser(ExpenseDTO expenseDTO) {
-        expenseRepository.save(expenseMapper.mapDTOToEntity(expenseDTO));
+    void addNewExpenseToUser(ExpenseDTO expenseDTO,String username) {
+        Expense expense = expenseMapper.mapDTOToEntity(expenseDTO);
+        expense.setUsername(username);
+        expenseRepository.save(expense);
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndExpenseCategory(String username, ExpenseCategory expenseCategory) {

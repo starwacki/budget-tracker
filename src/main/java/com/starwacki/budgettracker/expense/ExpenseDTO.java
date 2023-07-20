@@ -10,7 +10,6 @@ record ExpenseDTO(
 
         String name,
         String description,
-        String username,
         ExpenseCategory expenseCategory,
         LocalDate date,
         LocalTime time,

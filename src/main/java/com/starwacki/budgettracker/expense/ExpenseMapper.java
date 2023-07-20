@@ -11,7 +11,6 @@ final class ExpenseMapper implements Mapper<Expense, ExpenseDTO> {
         return ExpenseDTO
                 .builder()
                 .name(entity.getName())
-                .username(entity.getUsername())
                 .date(entity.getDate())
                 .time(entity.getTime())
                 .description(entity.getDescription())
@@ -25,7 +24,6 @@ final class ExpenseMapper implements Mapper<Expense, ExpenseDTO> {
         return Expense
                 .builder()
                 .name(dto.name())
-                .username(dto.username())
                 .date(dto.date())
                 .time(dto.time())
                 .description(dto.description())
