@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/graph")
-class ExpenseGraphController {
+public class ExpenseGraphController {
 
     private final ExpenseGraphService expenseGraphService;
 

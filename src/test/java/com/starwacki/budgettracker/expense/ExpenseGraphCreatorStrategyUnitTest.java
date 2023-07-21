@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
-class ExpenseGraphCreatorStrategyTest {
+public class ExpenseGraphCreatorStrategyUnitTest {
 
     @InjectMocks
     private ExpenseGraphCreatorStrategy expenseGraphCreatorStrategy;
@@ -36,7 +36,6 @@ class ExpenseGraphCreatorStrategyTest {
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.FOOD).moneyValue(31.0).build());
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.CAR).moneyValue(32.0).build());
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.CAR).moneyValue(33.0).build());
-
 
         //then
         ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
