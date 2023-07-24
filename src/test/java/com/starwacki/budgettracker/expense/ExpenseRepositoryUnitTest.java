@@ -12,9 +12,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+//Use only layer without starting server to test JPQL queries.
 @DataJpaTest
 @ActiveProfiles("test")
-public class ExpenseRepositoryIntegrationTest {
+public class ExpenseRepositoryUnitTest {
 
     @Autowired
     private ExpenseRepository expenseRepository;
