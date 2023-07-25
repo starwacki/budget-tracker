@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class ExpenseControllerIntegrationTest {
+class ExpenseControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -612,25 +612,20 @@ public class ExpenseControllerIntegrationTest {
                 });
     }
 
-    /**
-     *
-     *
-     *
-     */
-
     @Test
     @DisplayName("Test findAllPeriodExpenses() when user has expense in this period")
     void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithPeriod() throws Exception {
 
         //given
         String username = "alice_wonder";
-        int year = 2021;
+        LocalDate fromDate = LocalDate.of(2023,7,12);
+        LocalDate toDate = LocalDate.of(2024,10,19);
 
         //when
         int expectedExpensesSize = 1;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -640,18 +635,19 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllYearExpenses() when user hasn't any expenses")
+    @DisplayName("Test findAllPeriodExpenses() when user hasn't any expenses")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_periodQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
-        int year = 2021;
+        LocalDate fromDate = LocalDate.of(2023,7,12);
+        LocalDate toDate = LocalDate.of(2024,10,19);
 
         //when
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -661,27 +657,26 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllYearExpenses() when user hasn't expenses with this year")
+    @DisplayName("Test findAllPeriodExpenses() when user hasn't expenses with this period")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithPeriod() throws Exception {
 
-        ///given
+        //given
         String username = "alice_wonder";
-        int year = 2020;
+        LocalDate fromDate = LocalDate.of(2023,7,20);
+        LocalDate toDate = LocalDate.of(2024,10,19);
 
         //when
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
-                .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
                     List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
                     assertEquals(expectedExpensesSize,expenses.size());
                 });
     }
-
-
 
 
 }

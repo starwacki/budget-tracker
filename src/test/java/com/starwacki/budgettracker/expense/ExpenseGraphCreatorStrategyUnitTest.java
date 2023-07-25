@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class ExpenseGraphCreatorStrategyUnitTest {
+class ExpenseGraphCreatorStrategyUnitTest {
 
     @InjectMocks
     private ExpenseGraphCreatorStrategy expenseGraphCreatorStrategy;

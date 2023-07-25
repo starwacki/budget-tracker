@@ -58,4 +58,18 @@ class ExpenseService {
                 .map(expenseMapper::mapEntityToDTO)
                 .toList();
     }
+
+    List<ExpenseDTO> findAllExpensesByUsernameAndYear(String username, int year) {
+       return expenseRepository.findAllYearExpenses(username,year)
+               .stream()
+               .map(expenseMapper::mapEntityToDTO)
+               .toList();
+    }
+    
+    public List<ExpenseDTO> findAllPeriodExpenses(String username, LocalDate startDate, LocalDate endDate) {
+       return expenseRepository.findAllPeriodExpenses(username,startDate,endDate)
+                .stream()
+                .map(expenseMapper::mapEntityToDTO)
+                .toList();
+    }
 }

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DataJpaTest
 @ActiveProfiles("test")
-public class ExpenseRepositoryUnitTest {
+class ExpenseRepositoryUnitTest {
 
     @Autowired
     private ExpenseRepository expenseRepository;

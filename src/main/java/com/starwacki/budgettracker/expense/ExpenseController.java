@@ -19,7 +19,7 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @GetMapping("/{username}")
-    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsername(@PathVariable String username) {
+    public ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(@PathVariable String username) {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsername(username));
     }
 
@@ -29,18 +29,28 @@ public class ExpenseController {
     }
 
     @GetMapping("/{username}/date={date}")
-    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndDate(@PathVariable String username, @PathVariable LocalDate date) {
+    public ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(@PathVariable String username, @PathVariable LocalDate date) {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndDate(username,date));
     }
 
     @GetMapping("/{username}/week={date}")
-    public ResponseEntity<List<ExpenseDTO>> findAllWeekExpensesByUsernameAndDate(@PathVariable String username, @PathVariable LocalDate date) {
+    public ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate date) {
         return ResponseEntity.ok(expenseService.findAllWeekExpensesByUsernameAndDate(username,date));
     }
 
     @GetMapping("/{username}/month={monthOrder}")
-    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndMonth(@PathVariable String username, @PathVariable int monthOrder) {
+    public ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @PathVariable int monthOrder) {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndMonth(username,monthOrder));
+    }
+
+    @GetMapping("/{username}/year={year}")
+    public ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @PathVariable int year) {
+        return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndYear(username,year));
+    }
+
+    @GetMapping("/{username}/from={startDate}&to={endDate}")
+    public ResponseEntity<List<ExpenseDTO>> findAllPeriodExpenses(@PathVariable String username, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
+        return ResponseEntity.ok(expenseService.findAllPeriodExpenses(username,startDate,endDate));
     }
 
     @PostMapping("/{username}")
