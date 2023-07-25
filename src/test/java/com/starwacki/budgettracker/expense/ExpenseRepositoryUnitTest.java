@@ -12,7 +12,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-//Use only layer without starting server to test JPQL queries.
 @DataJpaTest
 @ActiveProfiles("test")
 public class ExpenseRepositoryUnitTest {
@@ -104,6 +103,16 @@ public class ExpenseRepositoryUnitTest {
                 .moneyValue(10.00)
                 .build();
 
+        Expense expense9 = Expense.builder()
+                .name("Train ticket")
+                .description("Train ticket")
+                .username("alice_wonder")
+                .expenseCategory(ExpenseCategory.OTHER)
+                .date(LocalDate.of(2021, 7, 18))
+                .time(LocalTime.of(20, 15))
+                .moneyValue(3.50)
+                .build();
+
         expenseRepository.save(expense1);
         expenseRepository.save(expense2);
         expenseRepository.save(expense3);
@@ -112,6 +121,7 @@ public class ExpenseRepositoryUnitTest {
         expenseRepository.save(expense6);
         expenseRepository.save(expense7);
         expenseRepository.save(expense8);
+        expenseRepository.save(expense9);
     }
 
     @Test
@@ -382,10 +392,108 @@ public class ExpenseRepositoryUnitTest {
         assertEquals(expectedNumberOfUserExpensesInThisMonth,actualNumberOfUserExpensesInThisMonth);
     }
 
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't any expense in database")
+    void Should_ReturnEmptyList_yearQuery() {
 
+        //given
+        String username = "user_with_zero_expenses";
+        int year = 2023;
 
+        //when
+        int actualNumberOfUserExpenses = expenseRepository.findAllYearExpenses(username,year).size();
+        int expectedNumberOfUserExpenses = 0;
 
+        //then
+        assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
+    }
 
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't any expense in this year")
+    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisYear() {
+
+        //given
+        String username = "alice_wonder";
+        int year = 2020;
+
+        //when
+        int actualNumberOfAllUserExpenses = expenseRepository.findAllUsernameExpenses(username).size();
+        int actualNumberOfUserExpensesInThisYear = expenseRepository.findAllYearExpenses(username,year).size();
+        int expectedNumberOfUserExpensesInThisYear = 0;
+
+        //then
+        assertNotEquals(0,actualNumberOfAllUserExpenses );
+        assertEquals(expectedNumberOfUserExpensesInThisYear,actualNumberOfUserExpensesInThisYear);
+    }
+
+    @Test
+    @DisplayName("Test findAlYearExpenses() when user has 3 expenses in this year")
+    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisYear() {
+
+        //given
+        String username = "alice_wonder";
+        int year = 2021;
+
+        //when
+        int actualNumberOfUserExpensesInThisYear = expenseRepository.findAllYearExpenses(username,year).size();
+        int expectedNumberOfUserExpensesInThisYear = 1;
+
+        //then
+        assertEquals(expectedNumberOfUserExpensesInThisYear,actualNumberOfUserExpensesInThisYear);
+    }
+
+    @Test
+    @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in database")
+    void Should_ReturnEmptyList_PeriodQuery() {
+
+        //given
+        String username = "user_with_zero_expenses";
+        LocalDate startDate = LocalDate.of(2023,10,12);
+        LocalDate endDate = LocalDate.of(2024,10,19);
+
+        //when
+        int actualNumberOfUserExpenses = expenseRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int expectedNumberOfUserExpenses = 0;
+
+        //then
+        assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
+    }
+
+    @Test
+    @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in this period")
+    void  Should_ReturnEmptyList_When_UserHasNotExpensesInThisPeriod() {
+
+        //given
+        String username = "alice_wonder";
+        LocalDate startDate = LocalDate.of(2023,10,12);
+        LocalDate endDate = LocalDate.of(2024,10,19);
+
+        //when
+        int actualNumberOfAllUserExpenses = expenseRepository.findAllUsernameExpenses(username).size();
+        int actualNumberOfUserExpensesInThisPeriod = expenseRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int expectedNumberOfUserExpensesInThisPeriod = 0;
+
+        //then
+        assertNotEquals(0,actualNumberOfAllUserExpenses );
+        assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
+    }
+
+    @Test
+    @DisplayName("Test findAllPeriodExpenses() when user has 1 expense in this period")
+    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisPeriod() {
+
+        //given
+        String username = "alice_wonder";
+        LocalDate startDate = LocalDate.of(2023,7,12);
+        LocalDate endDate = LocalDate.of(2024,10,19);
+
+        //when
+        int actualNumberOfUserExpensesInThisPeriod = expenseRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int expectedNumberOfUserExpensesInThisPeriod = 1;
+
+        //then
+        assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
+    }
 
 
 

@@ -124,6 +124,16 @@ public class ExpenseControllerIntegrationTest {
                 .moneyValue(10.00)
                 .build();
 
+        Expense expense9 = Expense.builder()
+                .name("Train ticket")
+                .description("Train ticket")
+                .username("alice_wonder")
+                .expenseCategory(ExpenseCategory.OTHER)
+                .date(LocalDate.of(2021, 7, 18))
+                .time(LocalTime.of(20, 15))
+                .moneyValue(3.50)
+                .build();
+
         expenseRepository.save(expense1);
         expenseRepository.save(expense2);
         expenseRepository.save(expense3);
@@ -132,6 +142,7 @@ public class ExpenseControllerIntegrationTest {
         expenseRepository.save(expense6);
         expenseRepository.save(expense7);
         expenseRepository.save(expense8);
+        expenseRepository.save(expense9);
     }
 
     @Test
@@ -378,7 +389,6 @@ public class ExpenseControllerIntegrationTest {
         //when
         int expectedExpensesSize = 1;
 
-
         //then
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/month="+monthOrdinal))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
@@ -391,7 +401,7 @@ public class ExpenseControllerIntegrationTest {
 
     @Test
     @DisplayName("Test findAllMonthExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_month() throws Exception {
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_monthQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -411,7 +421,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllMonthExpenses() when user hasn't expenses with this date")
+    @DisplayName("Test findAllMonthExpenses() when user hasn't expenses with this month")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithMonth() throws Exception {
 
         ///given
@@ -420,7 +430,6 @@ public class ExpenseControllerIntegrationTest {
 
         //when
         int expectedExpensesSize = 0;
-
 
         //then
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/month="+monthOrdinal))
@@ -538,8 +547,141 @@ public class ExpenseControllerIntegrationTest {
                         .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException));
-
     }
+
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user has expense with this year")
+    void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithYear() throws Exception {
+
+        //given
+        String username = "alice_wonder";
+        int year = 2021;
+
+        //when
+        int expectedExpensesSize = 1;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't any expenses")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_yearQuery() throws Exception {
+
+        //given
+        String username = "user_without_any_expenses";
+        int year = 2021;
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't expenses with this year")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithYear() throws Exception {
+
+        ///given
+        String username = "alice_wonder";
+        int year = 2020;
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    /**
+     *
+     *
+     *
+     */
+
+    @Test
+    @DisplayName("Test findAllPeriodExpenses() when user has expense in this period")
+    void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithPeriod() throws Exception {
+
+        //given
+        String username = "alice_wonder";
+        int year = 2021;
+
+        //when
+        int expectedExpensesSize = 1;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't any expenses")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_periodQuery() throws Exception {
+
+        //given
+        String username = "user_without_any_expenses";
+        int year = 2021;
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllYearExpenses() when user hasn't expenses with this year")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithPeriod() throws Exception {
+
+        ///given
+        String username = "alice_wonder";
+        int year = 2020;
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+
 
 
 }
