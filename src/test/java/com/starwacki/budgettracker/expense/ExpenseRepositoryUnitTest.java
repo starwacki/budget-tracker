@@ -116,7 +116,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsername() when user doesn't be in database")
-    void findAllByUsername_givenUsername_whenUserHas0Expenses_shouldReturnEmptyList() {
+    void Should_ReturnEmptyList_usernameQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -131,7 +131,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsername() when user has 4 expenses in database")
-    void findAllByUsername_givenUsername_whenUserHas4Expenses_shouldReturnListWith4Elements() {
+    void Should_ReturnListWith4Elements() {
 
         //given
         String username = "john_doe";
@@ -146,7 +146,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsername() correct sorting by the newest")
-    void findAllByUsername_givenUsername_whenUserHas4Expenses_shouldReturnListWith4ElementsSortedByTheNewest() {
+    void Should_ReturnListSortedByDate() {
 
         //given
         String username = "john_doe";
@@ -163,7 +163,6 @@ public class ExpenseRepositoryUnitTest {
         LocalDate actualDateOfFirstElement = userExpenses.get(0).getDate();
         LocalTime actualTimeOfFistElement = userExpenses.get(0).getTime();
 
-
         //then
         assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
         assertEquals(expectedDateOfFirstElement,actualDateOfFirstElement);
@@ -172,7 +171,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsernameAndExpenseCategory() when user hasn't expense with this category")
-    void findAllByUsernameAndExpenseCategory_givenUsernameAndExpenseCategory_whenUserHas0ExpensesInThisCategory_shouldReturnListWith2Elements() {
+    void Should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -188,7 +187,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsernameAndExpenseCategory() when user has 2 expenses in this category")
-    void findAllByUsernameAndExpenseCategory_givenUsernameAndExpenseCategory_whenUserHas2ExpensesInThisCategory_shouldReturnListWith2Elements() {
+    void Should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -204,7 +203,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test findAllByUsernameAndExpenseCategory() correct sorting")
-    void findAllByUsernameAndExpenseCategory_givenUsernameAndExpenseCategory_whenUserHas2ExpensesInThisCategory_shouldReturnListWith2ElementsSortedByTheNewest() {
+    void Should_ReturnSortedByDateList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -230,7 +229,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test  findAllByUsernameAndDate() when user hasn't any expense in database")
-    void findAllByUsernameAndDate_givenUsernameAndDate_whenUserHas0Expenses_shouldReturnEmptyList() {
+    void Should_ReturnEmptyList_dateQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -246,7 +245,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test  findAllByUsernameAndDate() when user hasn't any expense with this date")
-    void findAllByUsernameAndDate_givenUsernameAndDate_whenUserHas0ExpensesInThisDate_shouldReturnEmptyList() {
+    void Should_ReturnEmptyList_When_UserHasNotExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -263,8 +262,8 @@ public class ExpenseRepositoryUnitTest {
     }
 
     @Test
-    @DisplayName("Test  findAllByUsernameAndDate() when user has has 2 expenses with this date")
-    void findAllByUsernameAndDate_givenUsernameAndExistDate_whenUserHasTwoExpensesInThisDate_shouldReturnListWith() {
+    @DisplayName("Test  findAllByUsernameAndDate() when user has 2 expenses with this date")
+    void Should_Return2ElementsList_When_UserHasExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -278,14 +277,9 @@ public class ExpenseRepositoryUnitTest {
         assertEquals(expectedNumberOfUserExpensesInThisDate,actualNumberOfUserExpensesInThisDate);
     }
 
-    //....
-    //
-    //
-
-
     @Test
     @DisplayName("Test  findAllByUsernameAndMonth() when user hasn't any expense in database")
-    void findAllByUsernameAndMonth_givenUsernameAndMonth_whenUserHas0Expenses_shouldReturnEmptyList() {
+    void Should_ReturnEmptyList_monthQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -301,7 +295,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test  findAllByUsernameAndMonth() when user hasn't any expense in this month")
-    void  findAllByUsernameAndMonth_givenUsernameAndMonth_whenUserHas0ExpensesInThisMonth_shouldReturnEmptyList() {
+    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
@@ -319,7 +313,7 @@ public class ExpenseRepositoryUnitTest {
 
     @Test
     @DisplayName("Test  findAllByUsernameAndMonth() when user has 3 expenses in this month")
-    void findAllByUsernameAndMonth_givenUsernameAndMonth_whenUserHasThreeExpensesInThisMonth_shouldReturnListWith3Elements() {
+    void  Should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";

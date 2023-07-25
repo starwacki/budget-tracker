@@ -1,6 +1,5 @@
 package com.starwacki.budgettracker.expense;
 
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +16,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     private ExpenseGraphCreatorStrategy expenseGraphCreatorStrategy;
 
     @Test
-    void createGraph_givenClearList_shouldReturnClearHashMap() {
+    void Should_CreateExpenseGraph_When_ListIsEmpty() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -29,7 +28,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithTwoExpenseCategory_shouldReturnHashMapWithTwoKeyValues() {
+    void Should_Return2ExpenseGraphCategories_WhenMultipleExpenseCategories() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -43,7 +42,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithTwoExpenseCategory_shouldReturnTotalMoneySameLikeGivenDataCategory() {
+    void  Should_ReturnCorrectMoneyAmount_When_MultipleExpenseCategories() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -63,7 +62,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithOnlyOneExpenseCategory_shouldReturnHashMapWithOneKeyValues() {
+    void Should_CreateGraphWithOneExpenseCategory() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -77,7 +76,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithOnlyOneExpenseCategory_shouldReturnTotalMoneySameLikeSumOfExpensesMoney() {
+    void Should_ReturnCorrectMoneyAmount_When_OneExpenseCategory() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -94,7 +93,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithOnlyOneExpenseCategory_shouldReturn100PercentAmount() {
+    void Should_Return100PercentAmount_When_OneExpenseCategory() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -108,7 +107,7 @@ public class ExpenseGraphCreatorStrategyUnitTest {
     }
 
     @Test
-    void createGraph_givenDataWithDifferentExpenseCategory_shouldReturnCorrectPercentDistribution() {
+    void Should_ReturnCorrectExpenseDistribution_When_MultipleExpenseCategories() {
 
         //given
         List<Expense> expenses = new ArrayList<>();
@@ -127,18 +126,5 @@ public class ExpenseGraphCreatorStrategyUnitTest {
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.CAR).getPercentAmount(),expectedCarPercent);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.DEBTS).getPercentAmount(),expectedDebtsPercent);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
