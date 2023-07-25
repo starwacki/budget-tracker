@@ -12,18 +12,18 @@ class ExpenseGraphService {
     private final ExpenseRepository expenseRepository;
     private final ExpenseGraphCreatorStrategy expenseGraphCreatorStrategy;
     ExpenseGraph getAllExpensesGraphByUsername(String username) {
-        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllByUsername(username));
+        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllUsernameExpenses(username));
     }
 
     ExpenseGraph getAllExpensesGraphByUsernameAndExpenseCategory(String username, ExpenseCategory expenseCategory) {
-        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllByUsernameAndExpenseCategory(username,expenseCategory));
+        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory));
     }
 
     ExpenseGraph getAllExpensesGraphByUsernameAndDate(String username, LocalDate date) {
-        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllByUsernameAndDate(username,date));
+        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllDayExpenses(username,date));
     }
 
     ExpenseGraph getAllExpensesGraphByUsernameAndMonth(String username, int monthOrder) {
-        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllByUsernameAndMonth(username,monthOrder));
+        return expenseGraphCreatorStrategy.createGraph(expenseRepository.findAllMonthExpenses(username,monthOrder));
     }
 }

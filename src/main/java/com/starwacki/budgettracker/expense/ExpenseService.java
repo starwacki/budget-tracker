@@ -3,6 +3,7 @@ package com.starwacki.budgettracker.expense;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +16,7 @@ class ExpenseService {
 
    List<ExpenseDTO> findAllExpensesByUsername(String username) {
         return expenseRepository
-                .findAllByUsername(username)
+                .findAllUsernameExpenses(username)
                 .stream()
                 .map(expenseMapper::mapEntityToDTO)
                 .toList();
@@ -29,25 +30,32 @@ class ExpenseService {
 
     List<ExpenseDTO> findAllExpensesByUsernameAndExpenseCategory(String username, ExpenseCategory expenseCategory) {
         return expenseRepository
-                .findAllByUsernameAndExpenseCategory(username,expenseCategory)
+                .findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory)
                 .stream()
                 .map(expenseMapper::mapEntityToDTO)
                 .toList();
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndDate(String username, LocalDate date) {
-        return expenseRepository.findAllByUsernameAndDate(username,date)
+        return expenseRepository.findAllDayExpenses(username,date)
                 .stream()
                 .map(expenseMapper::mapEntityToDTO)
                 .toList();
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndMonth(String username, int monthOrder) {
-        return expenseRepository.findAllByUsernameAndMonth(username,monthOrder)
+        return expenseRepository.findAllMonthExpenses(username,monthOrder)
                 .stream()
                 .map(expenseMapper::mapEntityToDTO)
                 .toList();
     }
 
-
+    List<ExpenseDTO> findAllWeekExpensesByUsernameAndDate(String username, LocalDate date) {
+        LocalDate startOfWeek = date.with(DayOfWeek.MONDAY);
+        LocalDate endOfWeek = date.with(DayOfWeek.SUNDAY);
+        return expenseRepository.findAllWeekExpenses(username,startOfWeek,endOfWeek)
+                .stream()
+                .map(expenseMapper::mapEntityToDTO)
+                .toList();
+    }
 }

@@ -16,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
@@ -90,7 +89,7 @@ public class ExpenseControllerIntegrationTest {
                 .description("Bought pet food for the month")
                 .username("pet_owner")
                 .expenseCategory(ExpenseCategory.ANIMALS)
-                .date(LocalDate.of(2023, 7, 16))
+                .date(LocalDate.of(2023, 7, 24))
                 .time(LocalTime.of(18, 20))
                 .moneyValue(25.75)
                 .build();
@@ -98,9 +97,9 @@ public class ExpenseControllerIntegrationTest {
         Expense expense6 = Expense.builder()
                 .name("Gardening Supplies")
                 .description("Purchased seeds and gardening tools")
-                .username("green_thumb")
+                .username("pet_owner")
                 .expenseCategory(ExpenseCategory.HOBBY)
-                .date(LocalDate.of(2023, 7, 17))
+                .date(LocalDate.of(2023, 7, 30))
                 .time(LocalTime.of(11, 45))
                 .moneyValue(40.00)
                 .build();
@@ -108,9 +107,9 @@ public class ExpenseControllerIntegrationTest {
         Expense expense7 = Expense.builder()
                 .name("Books")
                 .description("Bought some new books to read")
-                .username("bookworm")
+                .username("pet_owner")
                 .expenseCategory(ExpenseCategory.EDUCATION)
-                .date(LocalDate.of(2023, 7, 21))
+                .date(LocalDate.of(2023, 7, 28))
                 .time(LocalTime.of(16, 30))
                 .moneyValue(60.50)
                 .build();
@@ -136,7 +135,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsername()  when user has 4 expenses")
+    @DisplayName("Test findAllUsernameExpenses()  when user has 4 expenses")
     void Should_Return200StatusCodeAnd4ExpensesList_When_UserHas4Expenses() throws Exception {
 
         //given
@@ -156,7 +155,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsername() when user hasn't expenses")
+    @DisplayName("Test findAllUsernameExpenses() when user hasn't expenses")
     void Should_Return200StatusCodeAnd4ExpensesList_When_UserHasNoExpenses() throws Exception {
 
         //given
@@ -176,7 +175,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsernameAndCategory() when user has expenses in category")
+    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user has expenses in category")
     void Should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesInCategory() throws Exception {
 
         //given
@@ -197,8 +196,8 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsernameAndCategory() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_category() throws Exception {
+    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't any expenses")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_categoryQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -218,7 +217,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsernameAndCategory() when user hasn't expenses in category")
+    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't expenses in category")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInCategory() throws Exception {
 
         //given
@@ -230,7 +229,7 @@ public class ExpenseControllerIntegrationTest {
 
         //then
         //(check that user has any expenses)
-        assertNotEquals(0,expenseRepository.findAllByUsername(username).size());
+        assertNotEquals(0,expenseRepository.findAllUsernameExpenses(username).size());
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
@@ -241,7 +240,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test  findAllExpensesByUsernameAndDate() when user has expenses with this date")
+    @DisplayName("Test findAllDayExpenses() when user has expenses with this date")
     void Should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesWithDate() throws Exception {
 
         //given
@@ -263,8 +262,8 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test  findAllExpensesByUsernameAndDate() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_date() throws Exception {
+    @DisplayName("Test findAllDayExpenses() when user hasn't any expenses")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_dateQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -284,7 +283,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsernameAndDate() when user hasn't expenses with this date")
+    @DisplayName("Test findAllDayExpenses() when user hasn't expenses with this date")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithDate() throws Exception {
 
         //given
@@ -304,8 +303,72 @@ public class ExpenseControllerIntegrationTest {
                 });
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"2023-07-24", "2023-07-25", "2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30"})
+    @DisplayName("Test findAllWeekExpenses() when user has expenses in this week")
+    void Should_Return200StatusCodeAnd3ExpenseList_When_UserHas3ExpensesInThisWeek(String dateString) throws Exception {
+
+        //given
+        String username = "pet_owner";
+        LocalDate date = LocalDate.parse(dateString);
+
+        //when
+        int expectedExpensesSize = 3;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
     @Test
-    @DisplayName("Test  findAllExpensesByUsernameAndMoth() when user has expense with this month")
+    @DisplayName("Test findAllWeekExpenses() when user hasn't any expenses")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_weekQuery() throws Exception {
+
+        //given
+        String username = "user_without_any_expenses";
+        LocalDate date = LocalDate.of(2023,10,12);
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllWeekExpenses() when user hasn't expenses in this week")
+    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInThisWeek() throws Exception {
+
+        ///given
+        String username = "pet_owner";
+        LocalDate date = LocalDate.of(2013,11,10);
+
+        //when
+        int expectedExpensesSize = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> {
+                    TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
+                    List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
+                    assertEquals(expectedExpensesSize,expenses.size());
+                });
+    }
+
+    @Test
+    @DisplayName("Test findAllMonthExpenses() when user has expense with this month")
     void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithMonth() throws Exception {
 
         //given
@@ -327,7 +390,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test  findAllExpensesByUsernameAndDate() when user hasn't any expenses")
+    @DisplayName("Test findAllMonthExpenses() when user hasn't any expenses")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_month() throws Exception {
 
         //given
@@ -348,7 +411,7 @@ public class ExpenseControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Test findAllExpensesByUsernameAndDate() when user hasn't expenses with this date")
+    @DisplayName("Test findAllMonthExpenses() when user hasn't expenses with this date")
     void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithMonth() throws Exception {
 
         ///given
@@ -386,13 +449,13 @@ public class ExpenseControllerIntegrationTest {
                 .build();
 
         //when
-        int beforeAddUserExpenses = expenseRepository.findAllByUsername(username).size();
+        int beforeAddUserExpenses = expenseRepository.findAllUsernameExpenses(username).size();
 
         //then
         mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username).content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> {
-                    int actualUserExpenses = expenseRepository.findAllByUsername(username).size();
+                    int actualUserExpenses = expenseRepository.findAllUsernameExpenses(username).size();
                     assertNotEquals(beforeAddUserExpenses,actualUserExpenses);
                 })
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(), HttpStatus.CREATED.value()));

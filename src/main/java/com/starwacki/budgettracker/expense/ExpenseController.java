@@ -33,6 +33,11 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndDate(username,date));
     }
 
+    @GetMapping("/{username}/week={date}")
+    public ResponseEntity<List<ExpenseDTO>> findAllWeekExpensesByUsernameAndDate(@PathVariable String username, @PathVariable LocalDate date) {
+        return ResponseEntity.ok(expenseService.findAllWeekExpensesByUsernameAndDate(username,date));
+    }
+
     @GetMapping("/{username}/month={monthOrder}")
     public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndMonth(@PathVariable String username, @PathVariable int monthOrder) {
         return ResponseEntity.ok(expenseService.findAllExpensesByUsernameAndMonth(username,monthOrder));
