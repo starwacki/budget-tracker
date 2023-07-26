@@ -1,4 +1,4 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.graph;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

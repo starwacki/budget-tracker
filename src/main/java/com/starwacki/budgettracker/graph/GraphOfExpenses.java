@@ -1,5 +1,6 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.graph;
 
+import com.starwacki.budgettracker.expense.ExpenseCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 @Getter
 @Setter
 @ToString
-class ExpenseGraph {
+class GraphOfExpenses {
 
     private HashMap<ExpenseCategory, ExpenseGraphCategory> expenses;
 

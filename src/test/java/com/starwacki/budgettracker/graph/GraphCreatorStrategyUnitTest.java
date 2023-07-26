@@ -1,19 +1,22 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.graph;
 
+import com.starwacki.budgettracker.expense.Expense;
+import com.starwacki.budgettracker.expense.ExpenseCategory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
-class ExpenseGraphCreatorStrategyUnitTest {
+class GraphCreatorStrategyUnitTest {
 
     @InjectMocks
-    private ExpenseGraphCreatorStrategy expenseGraphCreatorStrategy;
+    private GraphCreatorStrategy graphCreatorStrategy;
 
     @Test
     void Should_CreateExpenseGraph_When_ListIsEmpty() {
@@ -22,7 +25,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         List<Expense> expenses = new ArrayList<>();
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().size(),0);
         assertNotEquals(expenseGraph.getExpenses(),null);
     }
@@ -37,7 +40,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.CAR).moneyValue(33.0).build());
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().size(),2);
     }
 
@@ -56,7 +59,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         double moneyOfCarCategory=45.0+22.0;
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.FOOD).getMoneyAmount(),moneyOfFoodCategory);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.CAR).getMoneyAmount(),moneyOfCarCategory);
     }
@@ -71,7 +74,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.FOOD).moneyValue(33.0).build());
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().size(),1);
     }
 
@@ -88,7 +91,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         double sumOfMoney = 31.0+32.0+33.0;
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.FOOD).getMoneyAmount(),sumOfMoney);
     }
 
@@ -102,7 +105,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         expenses.add(Expense.builder().expenseCategory(ExpenseCategory.FOOD).moneyValue(33.0).build());
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.FOOD).getPercentAmount(),100);
     }
 
@@ -121,7 +124,7 @@ class ExpenseGraphCreatorStrategyUnitTest {
         double expectedDebtsPercent = 20;
 
         //then
-        ExpenseGraph expenseGraph = expenseGraphCreatorStrategy.createGraph(expenses);
+        GraphOfExpenses expenseGraph = graphCreatorStrategy.createGraph(expenses);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.FOOD).getPercentAmount(),expectedFoodPercent);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.CAR).getPercentAmount(),expectedCarPercent);
         assertEquals(expenseGraph.getExpenses().get(ExpenseCategory.DEBTS).getPercentAmount(),expectedDebtsPercent);

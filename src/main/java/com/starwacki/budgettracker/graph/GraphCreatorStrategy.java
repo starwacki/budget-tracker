@@ -1,16 +1,18 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.graph;
 
+import com.starwacki.budgettracker.expense.Expense;
+import com.starwacki.budgettracker.expense.ExpenseCategory;
 import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-class ExpenseGraphCreatorStrategy {
+class GraphCreatorStrategy {
 
-    public ExpenseGraph createGraph(List<Expense> expenses) {
+    public GraphOfExpenses createGraph(List<Expense> expenses) {
         HashMap<ExpenseCategory, ExpenseGraphCategory> graphData = new HashMap<>();
         getOnlyMoneyValuesFromExpenses(graphData,expenses);
         calculatePercentDistributionOfCategories(graphData);
-        return new ExpenseGraph(graphData);
+        return new GraphOfExpenses(graphData);
     }
 
     private void calculatePercentDistributionOfCategories(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData) {

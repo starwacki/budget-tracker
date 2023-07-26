@@ -38,6 +38,7 @@ class ExpenseControllerIntegrationTest {
     @Autowired
     private ExpenseRepository expenseRepository;
 
+
     private static final String ENDPOINT_REQUEST_MAPPING = "/expense";
 
     @BeforeEach
@@ -240,7 +241,7 @@ class ExpenseControllerIntegrationTest {
 
         //then
         //(check that user has any expenses)
-        assertNotEquals(0,expenseRepository.findAllUsernameExpenses(username).size());
+        assertNotEquals(0, expenseRepository.findAllUsernameExpenses(username).size());
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
