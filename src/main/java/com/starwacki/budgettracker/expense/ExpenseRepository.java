@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ExpenseRepository extends JpaRepository<Expense,Long> {
+interface ExpenseRepository extends JpaRepository<Expense,Long> {
 
     @Query("SELECT e FROM Expense e WHERE e.username = :username ORDER BY e.date DESC, e.time DESC")
     List<Expense> findAllUsernameExpenses(String username);

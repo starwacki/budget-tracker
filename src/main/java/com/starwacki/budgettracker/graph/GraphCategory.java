@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-class ExpenseGraphCategory {
+class GraphCategory {
 
     private double moneyAmount;
 

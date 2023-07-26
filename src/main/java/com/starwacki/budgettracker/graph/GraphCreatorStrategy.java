@@ -1,28 +1,26 @@
 package com.starwacki.budgettracker.graph;
 
-import com.starwacki.budgettracker.expense.Expense;
-import com.starwacki.budgettracker.expense.ExpenseCategory;
 import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
 class GraphCreatorStrategy {
 
-    public GraphOfExpenses createGraph(List<Expense> expenses) {
-        HashMap<ExpenseCategory, ExpenseGraphCategory> graphData = new HashMap<>();
+    public GraphOfExpenses createGraph(List<GraphExpense> expenses) {
+        HashMap<String, GraphCategory> graphData = new HashMap<>();
         getOnlyMoneyValuesFromExpenses(graphData,expenses);
         calculatePercentDistributionOfCategories(graphData);
         return new GraphOfExpenses(graphData);
     }
 
-    private void calculatePercentDistributionOfCategories(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData) {
+    private void calculatePercentDistributionOfCategories(HashMap<String, GraphCategory> graphData) {
         double allMoneyValue = getAllMoneyValue(graphData);
         calculatePercentDistributionForAllCategories(allMoneyValue,graphData);
     }
 
-    private void calculatePercentDistributionForAllCategories(double allMoneyValue,HashMap<ExpenseCategory, ExpenseGraphCategory> graphData) {
-        graphData.forEach((expenseCategory, expenseGraphCategory) ->
-                expenseGraphCategory.setPercentAmount(getPercentValue(allMoneyValue,expenseGraphCategory.getMoneyAmount())
+    private void calculatePercentDistributionForAllCategories(double allMoneyValue,HashMap<String, GraphCategory> graphData) {
+        graphData.forEach((expenseCategory, graphCategory) ->
+                graphCategory.setPercentAmount(getPercentValue(allMoneyValue, graphCategory.getMoneyAmount())
         ));
     }
 
@@ -30,35 +28,35 @@ class GraphCreatorStrategy {
         return expenseMoneyValue/allMoneyValue*100;
     }
 
-    private double getAllMoneyValue(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData) {
+    private double getAllMoneyValue(HashMap<String, GraphCategory> graphData) {
         return graphData
                 .values()
                 .stream()
-                .map(ExpenseGraphCategory::getMoneyAmount)
+                .map(GraphCategory::getMoneyAmount)
                 .mapToDouble(Double::doubleValue)
                 .sum();
     }
 
-    private void getOnlyMoneyValuesFromExpenses(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData,List<Expense> expenses) {
+    private void getOnlyMoneyValuesFromExpenses(HashMap<String, GraphCategory> graphData, List<GraphExpense> expenses) {
         expenses.forEach(expense -> addOnlyMoneyValuesToCategories(graphData,expense));
     }
 
-    private void addOnlyMoneyValuesToCategories(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData, Expense expense) {
+    private void addOnlyMoneyValuesToCategories(HashMap<String, GraphCategory> graphData, GraphExpense expense) {
         if (!isCategoryExist(graphData,expense))
             putNewCategoryToGraph(graphData,expense);
         else
             addOnlyMoneyValueToCategory(graphData,expense);
     }
 
-    private boolean isCategoryExist(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData, Expense expense) {
+    private boolean isCategoryExist(HashMap<String, GraphCategory> graphData, GraphExpense expense) {
         return graphData.containsKey(expense.getExpenseCategory());
     }
 
-    private void putNewCategoryToGraph(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData, Expense expense) {
-        graphData.put(expense.getExpenseCategory(),new ExpenseGraphCategory(expense.getMoneyValue(),0));
+    private void putNewCategoryToGraph(HashMap<String, GraphCategory> graphData, GraphExpense expense) {
+        graphData.put(expense.getExpenseCategory(),new GraphCategory(expense.getMoneyValue(),0));
     }
 
-    private void addOnlyMoneyValueToCategory(HashMap<ExpenseCategory, ExpenseGraphCategory> graphData, Expense expense) {
+    private void addOnlyMoneyValueToCategory(HashMap<String, GraphCategory> graphData, GraphExpense expense) {
         double actualMoneyValue = graphData.get(expense.getExpenseCategory()).getMoneyAmount();
         graphData.get(expense.getExpenseCategory())
                 .setMoneyAmount(actualMoneyValue+expense.getMoneyValue());

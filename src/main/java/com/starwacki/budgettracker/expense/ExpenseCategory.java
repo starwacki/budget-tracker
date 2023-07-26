@@ -1,6 +1,6 @@
 package com.starwacki.budgettracker.expense;
 
-public enum ExpenseCategory {
+enum ExpenseCategory {
 
     FOOD,
     HOME,

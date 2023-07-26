@@ -1,6 +1,5 @@
 package com.starwacki.budgettracker.graph;
 
-import com.starwacki.budgettracker.expense.ExpenseCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,28 +12,28 @@ import java.time.LocalDate;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/graph")
-public class ExpenseGraphController {
+public class GraphController {
 
-    private final ExpenseGraphService expenseGraphService;
+    private final GraphService graphService;
 
     @GetMapping("/{username}")
     public ResponseEntity<GraphOfExpenses> getAllExpensesGraphByUsername(@PathVariable String username) {
-        return ResponseEntity.ok(expenseGraphService.getAllExpensesGraphByUsername(username));
+        return ResponseEntity.ok(graphService.getAllExpensesGraphByUsername(username));
     }
 
     @GetMapping("/{username}/category={expenseCategory}")
-    public ResponseEntity<GraphOfExpenses>  getAllExpensesGraphByUsernameAndExpenseCategory(@PathVariable String username, @PathVariable ExpenseCategory expenseCategory) {
-        return ResponseEntity.ok(expenseGraphService.getAllExpensesGraphByUsernameAndExpenseCategory(username,expenseCategory));
+    public ResponseEntity<GraphOfExpenses>  getAllExpensesGraphByUsernameAndExpenseCategory(@PathVariable String username, @PathVariable String expenseCategory) {
+        return ResponseEntity.ok(graphService.getAllExpensesGraphByUsernameAndExpenseCategory(username,expenseCategory));
     }
 
     @GetMapping("/{username}/date={date}")
     public ResponseEntity<GraphOfExpenses> getAllExpensesGraphByUsernameAndDate(@PathVariable String username, @PathVariable LocalDate date) {
-        return ResponseEntity.ok(expenseGraphService.getAllExpensesGraphByUsernameAndDate(username,date));
+        return ResponseEntity.ok(graphService.getAllExpensesGraphByUsernameAndDate(username,date));
     }
 
     @GetMapping("/{username}/month={monthOrder}")
     public ResponseEntity<GraphOfExpenses> getAllExpensesGraphByUsernameAndMonth(@PathVariable String username, @PathVariable int monthOrder) {
-        return ResponseEntity.ok(expenseGraphService.getAllExpensesGraphByUsernameAndMonth(username,monthOrder));
+        return ResponseEntity.ok(graphService.getAllExpensesGraphByUsernameAndMonth(username,monthOrder));
     }
 
 }
