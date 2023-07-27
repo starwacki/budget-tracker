@@ -12,64 +12,54 @@ import java.util.List;
 class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
-    private final ExpenseMapper expenseMapper;
+    private final ExpenseQueryRepository expenseQueryRepository;
 
    List<ExpenseDTO> findAllExpensesByUsername(String username) {
-        return expenseRepository
-                .findAllUsernameExpenses(username)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+        return expenseQueryRepository.findAllUsernameExpenses(username);
     }
 
     void addNewExpenseToUser(ExpenseDTO expenseDTO,String username) {
-        Expense expense = expenseMapper.mapDTOToEntity(expenseDTO);
+        Expense expense = mapDTOToEntity(expenseDTO);
         expense.setUsername(username);
         expenseRepository.save(expense);
     }
 
+
     List<ExpenseDTO> findAllExpensesByUsernameAndExpenseCategory(String username, ExpenseCategory expenseCategory) {
-        return expenseRepository
-                .findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+        return expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory);
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndDate(String username, LocalDate date) {
-        return expenseRepository.findAllDayExpenses(username,date)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+        return expenseQueryRepository.findAllDayExpenses(username,date);
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndMonth(String username, int monthOrder) {
-        return expenseRepository.findAllMonthExpenses(username,monthOrder)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+        return expenseQueryRepository.findAllMonthExpenses(username,monthOrder);
     }
 
     List<ExpenseDTO> findAllWeekExpensesByUsernameAndDate(String username, LocalDate date) {
         LocalDate startOfWeek = date.with(DayOfWeek.MONDAY);
         LocalDate endOfWeek = date.with(DayOfWeek.SUNDAY);
-        return expenseRepository.findAllWeekExpenses(username,startOfWeek,endOfWeek)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+        return expenseQueryRepository.findAllWeekExpenses(username,startOfWeek,endOfWeek);
     }
 
     List<ExpenseDTO> findAllExpensesByUsernameAndYear(String username, int year) {
-       return expenseRepository.findAllYearExpenses(username,year)
-               .stream()
-               .map(expenseMapper::mapEntityToDTO)
-               .toList();
+       return expenseQueryRepository.findAllYearExpenses(username,year);
     }
     
-    public List<ExpenseDTO> findAllPeriodExpenses(String username, LocalDate startDate, LocalDate endDate) {
-       return expenseRepository.findAllPeriodExpenses(username,startDate,endDate)
-                .stream()
-                .map(expenseMapper::mapEntityToDTO)
-                .toList();
+   List<ExpenseDTO> findAllPeriodExpenses(String username, LocalDate startDate, LocalDate endDate) {
+       return expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate);
+    }
+
+    private Expense mapDTOToEntity(ExpenseDTO expenseDTO) {
+       return Expense
+               .builder()
+               .name(expenseDTO.name())
+               .moneyValue(expenseDTO.moneyValue())
+               .description(expenseDTO.description())
+               .expenseCategory(expenseDTO.expenseCategory())
+               .date(expenseDTO.date())
+               .time(expenseDTO.time())
+               .build();
     }
 }

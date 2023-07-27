@@ -8,24 +8,24 @@ import java.util.List;
 
 interface GraphExpenseQueryRepository extends Repository<GraphExpense,Long> {
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE e.username = :username")
+    @Query("SELECT g FROM GraphExpense g WHERE g.username = :username")
     List<GraphExpense> findAllUsernameExpenses(String username);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE e.username = :username AND e.expenseCategory = :expenseCategory ")
+    @Query("SELECT g FROM GraphExpense g WHERE g.username = :username AND g.expenseCategory = :expenseCategory ")
     List<GraphExpense> findAllUsernameExpensesWithThisExpenseCategory(String username, String expenseCategory);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE (e.username = :username AND e.date = :date ) ")
+    @Query("SELECT g FROM GraphExpense g WHERE (g.username = :username AND g.date = :date )")
     List<GraphExpense> findAllDayExpenses(String username, LocalDate date);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE (e.username = :username AND e.date >= :startOfWeek AND e.date <= :endOfWeek )")
+    @Query("SELECT g FROM GraphExpense g WHERE (g.username = :username AND g.date >= :startOfWeek AND g.date <= :endOfWeek )")
     List<GraphExpense> findAllWeekExpenses(String username,  LocalDate startOfWeek, LocalDate endOfWeek);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE e.username = :username AND MONTH(e.date) = :month")
+    @Query("SELECT g FROM GraphExpense g WHERE g.username = :username AND MONTH(g.date) = :month")
     List<GraphExpense> findAllMonthExpenses(String username, int month);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE e.username = :username AND FUNCTION('YEAR', e.date) = :year")
+    @Query("SELECT g FROM GraphExpense g WHERE g.username = :username AND FUNCTION('YEAR', g.date) = :year")
     List<GraphExpense> findAllYearExpenses(String username, int year);
 
-    @Query("SELECT NEW GraphExpense(e.id, e.expenseCategory, e.moneyValue) FROM Expense e WHERE (e.username = :username AND e.date >= :startDate AND e.date <= :endDate )")
+    @Query("SELECT g FROM GraphExpense g WHERE (g.username = :username AND g.date >= :startDate AND g.date <= :endDate )")
     List<GraphExpense> findAllPeriodExpenses(String username, LocalDate startDate, LocalDate endDate);
 }
