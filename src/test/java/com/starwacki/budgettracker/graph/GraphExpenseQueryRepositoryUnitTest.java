@@ -1,4 +1,4 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.graph;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,31 +7,26 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class ExpenseRepositoryUnitTest {
+class GraphExpenseQueryRepositoryUnitTest {
 
     @Autowired
-    private ExpenseRepository expenseRepository;
-
-    @Autowired
-    private ExpenseQueryRepository expenseQueryRepository;
+    private GraphExpenseQueryRepository graphExpenseQueryRepository;
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpenses() when user doesn't be in database")
+    @DisplayName("Test findAllUsernameGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_usernameQuery() {
 
         //given
         String username = "user_with_zero_expenses";
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -40,15 +35,14 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpenses() when user has 4 expenses in database")
+    @DisplayName("Test findAllUsernameGraphExpenses() when user has 4 expenses in database")
     void Should_ReturnListWith4Elements() {
 
         //given
         String username = "john_doe";
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        System.out.println(expenseQueryRepository.findAllUsernameExpenses(username));
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
         int expectedNumberOfUserExpenses = 4;
 
         //then
@@ -57,41 +51,16 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpenses() correct sorting by the newest")
-    void Should_ReturnListSortedByDate() {
+    @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't any expense in database")
+    void Should_ReturnEmptyList_expenseCategoryQuery() {
 
         //given
-        String username = "john_doe";
+        String username = "user_with_zero_expenses";
+        String expenseCategory = "OTHER";
+
 
         //when
-        List<ExpenseDTO> userExpenses = expenseQueryRepository.findAllUsernameExpenses(username);
-
-        int expectedNumberOfUserExpenses = 4;
-        int actualNumberOfUserExpenses = userExpenses.size();
-
-        LocalDate expectedDateOfFirstElement = LocalDate.of(2023, 7, 15);
-        LocalTime expectedTimeOfFistElement = LocalTime.of(15,45);
-
-        LocalDate actualDateOfFirstElement = userExpenses.get(0).date();
-        LocalTime actualTimeOfFistElement = userExpenses.get(0).time();
-
-        //then
-        assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
-        assertEquals(expectedDateOfFirstElement,actualDateOfFirstElement);
-        assertEquals(expectedTimeOfFistElement,actualTimeOfFistElement);
-    }
-
-    @Test
-    @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't expense with this category")
-    void Should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
-
-        //given
-        String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.OTHER;
-
-        //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpensesWithThisExpenseCategory(username,expenseCategory).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -100,15 +69,32 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user has 2 expenses in this category")
+    @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't expense with this category")
+    void Should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
+
+        //given
+        String username = "john_doe";
+        String expenseCategory = "OTHER";
+
+        //when
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpensesWithThisExpenseCategory(username,expenseCategory).size();
+        int expectedNumberOfUserExpenses = 0;
+
+        //then
+        assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
+    }
+
+    @Test
+    @Sql("classpath:data.sql")
+    @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user has 2 expenses in this category")
     void Should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
+        String expenseCategory = "FOOD";
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpensesWithThisExpenseCategory(username,expenseCategory).size();
         int expectedNumberOfUserExpenses = 2;
 
         //then
@@ -117,34 +103,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() correct sorting")
-    void Should_ReturnSortedByDateList_When_UserHasExpenseWithThisCategory() {
-
-        //given
-        String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
-
-        //when
-        List<ExpenseDTO> userExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory);
-
-        int expectedNumberOfUserExpenses = 2;
-        int actualNumberOfUserExpenses = userExpenses.size();
-
-        LocalDate expectedDateOfFirstElement = LocalDate.of(2023, 7, 15);
-        LocalTime expectedTimeOfFistElement = LocalTime.of(12,30);
-
-        LocalDate actualDateOfFirstElement = userExpenses.get(0).date();
-        LocalTime actualTimeOfFistElement = userExpenses.get(0).time();
-
-        //then
-        assertEquals(expectedNumberOfUserExpenses,actualNumberOfUserExpenses);
-        assertEquals(expectedDateOfFirstElement,actualDateOfFirstElement);
-        assertEquals(expectedTimeOfFistElement,actualTimeOfFistElement);
-    }
-
-    @Test
-    @Sql("classpath:data.sql")
-    @DisplayName("Test findAllDayExpenses() when user hasn't any expense in database")
+    @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_dateQuery() {
 
         //given
@@ -152,7 +111,7 @@ class ExpenseRepositoryUnitTest {
         LocalDate date = LocalDate.of(2022,10,12);
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllDayExpenses(username,date).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllDayGraphExpenses(username,date).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -161,16 +120,16 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllDayExpenses() when user hasn't any expense with this date")
-    void Should_ReturnEmptyList_When_UserHasNotExpensesWithThisDate() {
+    @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense with this date")
+    void Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
         LocalDate dateWithoutAnyExpense = LocalDate.of(2022,10,12);
 
         //when
-        int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisDate = expenseQueryRepository.findAllDayExpenses(username,dateWithoutAnyExpense).size();
+        int actualNumberOfAllUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
+        int actualNumberOfUserExpensesInThisDate =  graphExpenseQueryRepository.findAllDayGraphExpenses(username,dateWithoutAnyExpense).size();
         int expectedNumberOfUserExpensesInThisDate = 0;
 
         //then
@@ -180,15 +139,15 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllDayExpenses() when user has 2 expenses with this date")
-    void Should_Return2ElementsList_When_UserHasExpensesWithThisDate() {
+    @DisplayName("Test findAllDayGraphExpenses() when user has 2 expenses with this date")
+    void Should_Return2ElementsList_When_UserHasGraphExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
-        LocalDate dateWithoutAnyExpense = LocalDate.of(2023,7,15);
+        LocalDate date = LocalDate.of(2023,7,15);
 
         //when
-        int actualNumberOfUserExpensesInThisDate = expenseQueryRepository.findAllDayExpenses(username,dateWithoutAnyExpense).size();
+        int actualNumberOfUserExpensesInThisDate = graphExpenseQueryRepository.findAllDayGraphExpenses(username,date).size();
         int expectedNumberOfUserExpensesInThisDate = 2;
 
         //then
@@ -197,7 +156,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllWeekExpenses() when user hasn't any expense in database")
+    @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_weekQuery() {
 
         //given
@@ -206,7 +165,7 @@ class ExpenseRepositoryUnitTest {
         LocalDate sundayDate = LocalDate.of(2023,7,30);
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllWeekExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllWeekGraphExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -215,8 +174,8 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllWeekExpenses() when user hasn't any expense in this week")
-    void Should_ReturnEmptyList_When_UserHasNotExpensesInThisWeek() {
+    @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in this week")
+    void Should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisWeek() {
 
         //given
         String username = "john_doe";
@@ -224,8 +183,8 @@ class ExpenseRepositoryUnitTest {
         LocalDate sundayDate = LocalDate.of(2023,7,30);
 
         //when
-        int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisWeek = expenseQueryRepository.findAllWeekExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfAllUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
+        int actualNumberOfUserExpensesInThisWeek = graphExpenseQueryRepository.findAllWeekGraphExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpensesInThisWeek = 0;
 
         //then
@@ -233,10 +192,9 @@ class ExpenseRepositoryUnitTest {
         assertEquals(expectedNumberOfUserExpensesInThisWeek,actualNumberOfUserExpensesInThisWeek);
     }
 
-
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllWeekExpenses() when user has 3 expenses in this week")
+    @DisplayName("Test findAllWeekGraphExpenses() when user has 3 expenses in this week")
     void Should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
 
         //given
@@ -245,7 +203,7 @@ class ExpenseRepositoryUnitTest {
         LocalDate sundayDate = LocalDate.of(2023,7,30);
 
         //when
-        int actualNumberOfUserExpensesInThisWeek = expenseQueryRepository.findAllWeekExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfUserExpensesInThisWeek = graphExpenseQueryRepository.findAllWeekGraphExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpensesInThisWeek = 3;
 
         //then
@@ -254,7 +212,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllMonthExpenses() when user hasn't any expense in database")
+    @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_monthQuery() {
 
         //given
@@ -262,7 +220,7 @@ class ExpenseRepositoryUnitTest {
         int monthOrdinal = 12;
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllMonthGraphExpenses(username,monthOrdinal).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -271,16 +229,16 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllMonthExpenses() when user hasn't any expense in this month")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisMonth() {
+    @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in this month")
+    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
         int monthOrdinal = 12;
 
         //when
-        int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfAllUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
+        int actualNumberOfUserExpensesInThisMonth = graphExpenseQueryRepository.findAllMonthGraphExpenses(username,monthOrdinal).size();
         int expectedNumberOfUserExpensesInThisMonth = 0;
 
         //then
@@ -290,7 +248,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllMonthExpenses() when user has 3 expenses in this month")
+    @DisplayName("Test findAllMonthGraphExpenses() when user has 3 expenses in this month")
     void  Should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
 
         //given
@@ -298,7 +256,7 @@ class ExpenseRepositoryUnitTest {
         int monthOrdinal = 7;
 
         //when
-        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfUserExpensesInThisMonth = graphExpenseQueryRepository.findAllMonthGraphExpenses(username,monthOrdinal).size();
         int expectedNumberOfUserExpensesInThisMonth = 3;
 
         //then
@@ -307,7 +265,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllYearExpenses() when user hasn't any expense in database")
+    @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_yearQuery() {
 
         //given
@@ -315,7 +273,7 @@ class ExpenseRepositoryUnitTest {
         int year = 2023;
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllYearExpenses(username,year).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllYearGraphExpenses(username,year).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -324,16 +282,16 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllYearExpenses() when user hasn't any expense in this year")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisYear() {
+    @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in this year")
+    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
         int year = 2020;
 
         //when
-        int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisYear = expenseQueryRepository.findAllYearExpenses(username,year).size();
+        int actualNumberOfAllUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
+        int actualNumberOfUserExpensesInThisYear = graphExpenseQueryRepository.findAllYearGraphExpenses(username,year).size();
         int expectedNumberOfUserExpensesInThisYear = 0;
 
         //then
@@ -343,15 +301,15 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAlYearExpenses() when user has 3 expenses in this year")
-    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisYear() {
+    @DisplayName("Test findAllYearGraphExpenses() when user has 1 expenses in this year")
+    void  Should_Return1ElementsList_When_UserHas1GraphExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
         int year = 2021;
 
         //when
-        int actualNumberOfUserExpensesInThisYear = expenseQueryRepository.findAllYearExpenses(username,year).size();
+        int actualNumberOfUserExpensesInThisYear = graphExpenseQueryRepository.findAllYearGraphExpenses(username,year).size();
         int expectedNumberOfUserExpensesInThisYear = 1;
 
         //then
@@ -360,7 +318,7 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in database")
+    @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in database")
     void Should_ReturnEmptyList_PeriodQuery() {
 
         //given
@@ -369,7 +327,7 @@ class ExpenseRepositoryUnitTest {
         LocalDate endDate = LocalDate.of(2024,10,19);
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int actualNumberOfUserExpenses = graphExpenseQueryRepository.findAllPeriodGraphExpenses(username,startDate,endDate).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -378,8 +336,8 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in this period")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesInThisPeriod() {
+    @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in this period")
+    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisPeriod() {
 
         //given
         String username = "alice_wonder";
@@ -387,8 +345,8 @@ class ExpenseRepositoryUnitTest {
         LocalDate endDate = LocalDate.of(2024,10,19);
 
         //when
-        int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisPeriod = expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int actualNumberOfAllUserExpenses = graphExpenseQueryRepository.findAllUsernameGraphExpenses(username).size();
+        int actualNumberOfUserExpensesInThisPeriod = graphExpenseQueryRepository.findAllPeriodGraphExpenses(username,startDate,endDate).size();
         int expectedNumberOfUserExpensesInThisPeriod = 0;
 
         //then
@@ -398,8 +356,8 @@ class ExpenseRepositoryUnitTest {
 
     @Test
     @Sql("classpath:data.sql")
-    @DisplayName("Test findAllPeriodExpenses() when user has 1 expense in this period")
-    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisPeriod() {
+    @DisplayName("Test findAllPeriodGraphExpenses() when user has 1 expense in this period")
+    void  Should_Return1ElementsList_When_UserHas1GraphExpensesWithThisPeriod() {
 
         //given
         String username = "alice_wonder";
@@ -407,12 +365,14 @@ class ExpenseRepositoryUnitTest {
         LocalDate endDate = LocalDate.of(2024,10,19);
 
         //when
-        int actualNumberOfUserExpensesInThisPeriod = expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate).size();
+        int actualNumberOfUserExpensesInThisPeriod = graphExpenseQueryRepository.findAllPeriodGraphExpenses(username,startDate,endDate).size();
         int expectedNumberOfUserExpensesInThisPeriod = 1;
 
         //then
         assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
     }
+
+
 
 
 

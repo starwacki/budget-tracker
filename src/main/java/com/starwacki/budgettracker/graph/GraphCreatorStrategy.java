@@ -61,6 +61,4 @@ class GraphCreatorStrategy {
         graphData.get(expense.getExpenseCategory())
                 .setMoneyAmount(actualMoneyValue+expense.getMoneyValue());
     }
-
-
 }

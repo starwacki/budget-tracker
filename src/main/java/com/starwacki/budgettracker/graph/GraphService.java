@@ -2,7 +2,6 @@ package com.starwacki.budgettracker.graph;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 
 @Service
@@ -11,19 +10,27 @@ class GraphService {
 
     private final GraphExpenseQueryRepository graphExpenseQueryRepository;
     private final GraphCreatorStrategy graphCreatorStrategy;
-    GraphOfExpenses getAllExpensesGraphByUsername(String username) {
-        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllUsernameExpenses(username));
+    GraphOfExpenses createGraphOfUserExpenses(String username) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllUsernameGraphExpenses(username));
     }
 
-    GraphOfExpenses getAllExpensesGraphByUsernameAndExpenseCategory(String username, String expenseCategory) {
-        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory));
+    GraphOfExpenses createGraphOfUserExpensesWhenExpenseCategory(String username, String expenseCategory) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllUsernameGraphExpensesWithThisExpenseCategory(username,expenseCategory));
     }
 
-    GraphOfExpenses getAllExpensesGraphByUsernameAndDate(String username, LocalDate date) {
-        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllDayExpenses(username,date));
+    GraphOfExpenses createGraphOfUserExpensesWhenDate(String username, LocalDate date) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllDayGraphExpenses(username,date));
     }
 
-    GraphOfExpenses getAllExpensesGraphByUsernameAndMonth(String username, int monthOrder) {
-        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllMonthExpenses(username,monthOrder));
+    GraphOfExpenses createGraphOfUserExpensesWhenMonth(String username, int monthOrder) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllMonthGraphExpenses(username,monthOrder));
+    }
+
+    GraphOfExpenses createGraphOfUserExpensesWhenYear(String username, int year) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllYearGraphExpenses(username,year));
+    }
+
+    GraphOfExpenses createGraphOfUserExpensesWhenPeriod(String username, LocalDate startDate, LocalDate endDate) {
+        return graphCreatorStrategy.createGraph(graphExpenseQueryRepository.findAllPeriodGraphExpenses(username,startDate,endDate));
     }
 }

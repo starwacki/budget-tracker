@@ -1,15 +1,11 @@
 package com.starwacki.budgettracker.graph;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashMap;
 
-@AllArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Getter(value = AccessLevel.PACKAGE)
 @ToString
 class GraphOfExpenses {
 

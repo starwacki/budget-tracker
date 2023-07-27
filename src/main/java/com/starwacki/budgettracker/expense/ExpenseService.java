@@ -2,7 +2,6 @@ package com.starwacki.budgettracker.expense;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
+
     private final ExpenseQueryRepository expenseQueryRepository;
 
    List<ExpenseDTO> findAllExpensesByUsername(String username) {
@@ -19,8 +19,7 @@ class ExpenseService {
     }
 
     void addNewExpenseToUser(ExpenseDTO expenseDTO,String username) {
-        Expense expense = mapDTOToEntity(expenseDTO);
-        expense.setUsername(username);
+        Expense expense = createExpenseFromDTOAndName(expenseDTO,username);
         expenseRepository.save(expense);
     }
 
@@ -51,9 +50,10 @@ class ExpenseService {
        return expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate);
     }
 
-    private Expense mapDTOToEntity(ExpenseDTO expenseDTO) {
+    private Expense createExpenseFromDTOAndName(ExpenseDTO expenseDTO,String username) {
        return Expense
                .builder()
+               .username(username)
                .name(expenseDTO.name())
                .moneyValue(expenseDTO.moneyValue())
                .description(expenseDTO.description())

@@ -32,5 +32,4 @@ class GraphExpense {
 
     private double moneyValue;
 
-
 }
