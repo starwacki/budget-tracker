@@ -1,40 +1,25 @@
 package com.starwacki.budgettracker.chart;
 
+import org.springframework.stereotype.Component;
+
 import java.time.DayOfWeek;
 import java.time.Month;
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 
-class BarChartCreatorStrategy  {
+@Component
+class BarChartCreatorStrategy extends ChartCreatorStrategy  {
 
-    public static BarChart<DayOfWeek> createWeekBarChart(List<ChartExpense> expenses) {
-        HashMap<DayOfWeek,ChartCategory> chart = new HashMap<>();
-        expenses.forEach(chartExpense -> fillChart(chartExpense.getDate().getDayOfWeek(),chart,chartExpense));
-        return new BarChart<>(chart);
+    BarChart<DayOfWeek> createDaysBarChart(List<ChartExpense> expenses) {
+        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getDate().getDayOfWeek()));
     }
 
-    public static BarChart<Month> createOneYearBarChart(List<ChartExpense> expenses) {
-        HashMap<Month,ChartCategory> chart = new HashMap<>();
-        expenses.forEach(chartExpense -> fillChart(chartExpense.getDate().getMonth(),chart,chartExpense));
-        return new BarChart<>(chart);
+    BarChart<Month> createMonthsBarChart(List<ChartExpense> expenses) {
+       return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getDate().getMonth()));
     }
 
-    private static <T> void fillChart(T bar, HashMap<T,ChartCategory> chart, ChartExpense chartExpense) {
-        checkMapContainKey(bar,chart);
-        addMoneyToChartCategory(chart,bar,chartExpense);
+    BarChart<String> createExpensiveCategoryBarChart(List<ChartExpense> expenses) {
+        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getExpenseCategory()));
     }
-
-    private static <T> void checkMapContainKey(T bar, HashMap<T,ChartCategory> chart)  {
-        if (!chart.containsKey(bar))
-            chart.put(bar,new ChartCategory(0,0));
-    }
-
-    private static  <T> void addMoneyToChartCategory(HashMap<T,ChartCategory> chart, T bar, ChartExpense chartExpense) {
-        chart.get(bar).setMoneyAmount(chart.get(bar).getMoneyAmount()+chartExpense.getMoneyValue());
-    }
-
-
 
 
 }

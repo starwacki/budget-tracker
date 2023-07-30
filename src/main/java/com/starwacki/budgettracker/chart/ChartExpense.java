@@ -1,6 +1,5 @@
-package com.starwacki.budgettracker.graph;
+package com.starwacki.budgettracker.chart;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +15,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 @Table(name = "expenses")
-class GraphExpense {
+class ChartExpense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

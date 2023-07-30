@@ -1,4 +1,4 @@
-package com.starwacki.budgettracker.graph;
+package com.starwacki.budgettracker.chart;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-class GraphCategory {
+class ChartCategory {
 
     private double moneyAmount;
 
-    private double percentAmount;
+    private String percentageAmount;
 
 }

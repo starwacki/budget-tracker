@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 class PieChart extends Chart<String>{
 
-    public PieChart(HashMap<String, ChartCategory> expenses) {
+    PieChart(HashMap<String, ChartCategory> expenses) {
         super(expenses);
     }
 
