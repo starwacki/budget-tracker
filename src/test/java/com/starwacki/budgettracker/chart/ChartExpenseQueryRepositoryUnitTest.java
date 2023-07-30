@@ -165,7 +165,7 @@ class ChartExpenseQueryRepositoryUnitTest {
         LocalDate sundayDate = LocalDate.of(2023,7,30);
 
         //when
-        int actualNumberOfUserExpenses = chartExpenseQueryRepository.findAllChartGraphExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfUserExpenses = chartExpenseQueryRepository.findAllWeekChartExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -184,7 +184,7 @@ class ChartExpenseQueryRepositoryUnitTest {
 
         //when
         int actualNumberOfAllUserExpenses = chartExpenseQueryRepository.findAllUsernameChartExpenses(username).size();
-        int actualNumberOfUserExpensesInThisWeek = chartExpenseQueryRepository.findAllChartGraphExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfUserExpensesInThisWeek = chartExpenseQueryRepository.findAllWeekChartExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpensesInThisWeek = 0;
 
         //then
@@ -203,7 +203,7 @@ class ChartExpenseQueryRepositoryUnitTest {
         LocalDate sundayDate = LocalDate.of(2023,7,30);
 
         //when
-        int actualNumberOfUserExpensesInThisWeek = chartExpenseQueryRepository.findAllChartGraphExpenses(username,mondayDate,sundayDate).size();
+        int actualNumberOfUserExpensesInThisWeek = chartExpenseQueryRepository.findAllWeekChartExpenses(username,mondayDate,sundayDate).size();
         int expectedNumberOfUserExpensesInThisWeek = 3;
 
         //then

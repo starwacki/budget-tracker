@@ -6,6 +6,19 @@ import java.util.List;
 
 abstract class ChartCreatorStrategy {
 
+
+    /**
+     * Function create chart by given expenses and bar chart (operation).
+     * The most important thing is to correct define operation and give filtered list of expenses.
+     * For example: If you will to get weekly expenses chart, and you give T (segment) as DayOfWeek
+     * ChartCategory will be creating only by DayOfWeek (without date care).
+     * @param expenses List of expenses - should be filtered before calling the method.
+     * @param chartExpenseOperation operation that return our chart segment type.
+     * @return HashMap<T,ChartCategory> - our chart.
+     * @param <T> is one of chart segments. For example: if you create weekly expenses chart
+     * You have 7 segments: Monday, Tuesday .... Sunday
+     * created by Szymon Tarwacki 30.07.2023
+     */
     <T> HashMap<T, ChartCategory> createChart(List<ChartExpense> expenses, ChartExpenseOperation<T> chartExpenseOperation) {
         HashMap<T, ChartCategory> chart = new HashMap<>();
         expenses.forEach(chartExpense -> fillChart(chartExpenseOperation.doOperation(chartExpense), chart, chartExpense));
@@ -13,12 +26,20 @@ abstract class ChartCreatorStrategy {
         return chart;
     }
 
+
+    /**
+     * Operation to separation chart segments
+     */
     @FunctionalInterface
     interface ChartExpenseOperation<T> {
         T doOperation(ChartExpense chartExpense);
 
     }
 
+    /**
+     * @param bar - chart segment.
+     * Operation extract expenses related to a specific segment and add them to the category.
+     */
     private <T> void fillChart(T bar, HashMap<T, ChartCategory> chart, ChartExpense chartExpense) {
         checkMapContainKey(bar, chart);
         addMoneyToChartCategory(chart, bar, chartExpense);

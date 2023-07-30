@@ -15,14 +15,11 @@ class ChartFactory {
 
 
     BarChart<?> getBarChart(BarChartType type, List<ChartExpense> expenses) {
-        BarChart<?> chart;
-        switch (type) {
-            case DAILY -> chart = barChartCreatorStrategy.createDaysBarChart(expenses);
-            case MONTHLY -> chart = barChartCreatorStrategy.createMonthsBarChart(expenses);
-            case EXPENSE_CATEGORY -> chart = barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
-            default -> throw new IllegalArgumentException();
-        }
-        return chart;
+        return switch (type) {
+            case DAILY -> barChartCreatorStrategy.createDaysBarChart(expenses);
+            case MONTHLY -> barChartCreatorStrategy.createMonthsBarChart(expenses);
+            case EXPENSE_CATEGORY -> barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
+        };
     }
 
     PieChart getPieChart(List<ChartExpense> expenses) {

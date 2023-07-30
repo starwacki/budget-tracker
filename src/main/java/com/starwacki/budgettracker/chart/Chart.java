@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 @Getter
 abstract class Chart<T> {
+
     private HashMap<T, ChartCategory> expenses;
 
     Chart(HashMap<T, ChartCategory> expenses) {

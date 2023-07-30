@@ -25,7 +25,7 @@ interface ChartExpenseQueryRepository extends Repository<ChartExpense,Long> {
     @Query("SELECT c " +
             "FROM ChartExpense c " +
             "WHERE (c.username = :username AND c.date >= :startOfWeek AND c.date <= :endOfWeek )")
-    List<ChartExpense> findAllChartGraphExpenses(String username, LocalDate startOfWeek, LocalDate endOfWeek);
+    List<ChartExpense> findAllWeekChartExpenses(String username, LocalDate startOfWeek, LocalDate endOfWeek);
 
     @Query("SELECT c " +
             "FROM ChartExpense c " +
