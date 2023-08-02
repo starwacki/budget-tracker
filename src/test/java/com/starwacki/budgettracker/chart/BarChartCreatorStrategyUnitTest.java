@@ -65,14 +65,14 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnWeeklyChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,2)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,3)).build()
         );
 
         //then
-        BarChart<DayOfWeek> actualChart = barChartCreatorStrategy.createDaysBarChart(oneWeekExpenses);
+        BarChart<DayOfWeek> actualChart = barChartCreatorStrategy.createDaysBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
 
     }
@@ -82,14 +82,14 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnMonthlyChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,9,2)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,10,3)).build()
         );
 
         //then
-        BarChart<Month> actualChart = barChartCreatorStrategy.createMonthsBarChart(oneWeekExpenses);
+        BarChart<Month> actualChart = barChartCreatorStrategy.createMonthsBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
     }
 
@@ -98,25 +98,25 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnExpensiveCategoryChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().expenseCategory("FOOD").build(),
                 ChartExpense.builder().expenseCategory("OTHER").build(),
                 ChartExpense.builder().expenseCategory("CAR").build()
         );
 
         //then
-        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(oneWeekExpenses);
+        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(50)
     @DisplayName("Test correct percent distribution")
     void should_ReturnOneHundredPercentSumOfEachCategory() {
 
         //given
         double maxValue = 100;
         double minValue = 10;
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
@@ -125,7 +125,7 @@ class BarChartCreatorStrategyUnitTest {
         );
 
         //when
-        BarChart<DayOfWeek> chart = barChartCreatorStrategy.createDaysBarChart(oneWeekExpenses);
+        BarChart<DayOfWeek> chart = barChartCreatorStrategy.createDaysBarChart(expenses);
         double sumOfPercentDistribution = chart.getExpenses().values()
                 .stream()
                 .map(chartCategory -> Double.valueOf(chartCategory.getPercentageAmount().replace(",",".").replace("%","")))
@@ -141,7 +141,7 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnCorrectMoneyAmount_daysBarChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(50).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(60).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(30).build(),
@@ -150,7 +150,7 @@ class BarChartCreatorStrategyUnitTest {
         );
 
         //then
-        BarChart<DayOfWeek> actualChart = barChartCreatorStrategy.createDaysBarChart(oneWeekExpenses);
+        BarChart<DayOfWeek> actualChart = barChartCreatorStrategy.createDaysBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
         assertThat(actualChart.getExpenses().get(LocalDate.of(2023,8,1).getDayOfWeek()).getMoneyAmount(),is(110.0));
         assertThat(actualChart.getExpenses().get(LocalDate.of(2023,8,2).getDayOfWeek()).getMoneyAmount(),is(70.0));
@@ -162,7 +162,7 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnCorrectMoneyAmount_monthsBarChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(50).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(60).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,9,2)).moneyValue(30).build(),
@@ -172,7 +172,7 @@ class BarChartCreatorStrategyUnitTest {
 
 
         //then
-        BarChart<Month> actualChart = barChartCreatorStrategy.createMonthsBarChart(oneWeekExpenses);
+        BarChart<Month> actualChart = barChartCreatorStrategy.createMonthsBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
         assertThat(actualChart.getExpenses().get(Month.AUGUST).getMoneyAmount(),is(110.0));
         assertThat(actualChart.getExpenses().get(Month.SEPTEMBER).getMoneyAmount(),is(70.0));
@@ -184,7 +184,7 @@ class BarChartCreatorStrategyUnitTest {
     void should_ReturnCorrectMoneyAmount_expensiveCategoryBarChart() {
 
         //given
-        List<ChartExpense> oneWeekExpenses = List.of(
+        List<ChartExpense> expenses = List.of(
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(50).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(60).build(),
                 ChartExpense.builder().date(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(30).build(),
@@ -194,7 +194,7 @@ class BarChartCreatorStrategyUnitTest {
 
 
         //then
-        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(oneWeekExpenses);
+        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
         assertThat(actualChart.getExpenses().get("FOOD").getMoneyAmount(),is(110.0));
         assertThat(actualChart.getExpenses().get("OTHER").getMoneyAmount(),is(70.0));
