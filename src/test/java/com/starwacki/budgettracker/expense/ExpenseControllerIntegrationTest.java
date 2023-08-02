@@ -47,7 +47,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllUsernameExpenses()  when user has 4 expenses")
-    void Should_Return200StatusCodeAnd4ExpensesList_When_UserHas4Expenses() throws Exception {
+    void should_Return200StatusCodeAnd4ExpensesList_When_UserHas4Expenses() throws Exception {
 
         //given
         String username = "john_doe";
@@ -72,7 +72,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllUsernameExpenses() when user hasn't expenses")
-    void Should_Return200StatusCodeAnd4ExpensesList_When_UserHasNoExpenses() throws Exception {
+    void should_Return200StatusCodeAnd4ExpensesList_When_UserHasNoExpenses() throws Exception {
 
         //given
         String username = "user_without_expenses";
@@ -94,7 +94,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user has expenses in category")
-    void Should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesInCategory() throws Exception {
+    void should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesInCategory() throws Exception {
 
         //given
         String username = "john_doe";
@@ -117,7 +117,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_categoryQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_categoryQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -140,7 +140,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't expenses in category")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInCategory() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInCategory() throws Exception {
 
         //given
         String username = "john_doe";
@@ -165,7 +165,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllDayExpenses() when user has expenses with this date")
-    void Should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesWithDate() throws Exception {
+    void should_Return200StatusCodeAnd2ExpensesList_When_UserHas2ExpensesWithDate() throws Exception {
 
         //given
         String username = "john_doe";
@@ -189,7 +189,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllDayExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_dateQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_dateQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -212,7 +212,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllDayExpenses() when user hasn't expenses with this date")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithDate() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithDate() throws Exception {
 
         //given
         String username = "john_doe";
@@ -236,7 +236,7 @@ class ExpenseControllerIntegrationTest {
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @ValueSource(strings = {"2023-07-24", "2023-07-25", "2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30"})
     @DisplayName("Test findAllWeekExpenses() when user has expenses in this week")
-    void Should_Return200StatusCodeAnd3ExpenseList_When_UserHas3ExpensesInThisWeek(String dateString) throws Exception {
+    void should_Return200StatusCodeAnd3ExpenseList_When_UserHas3ExpensesInThisWeek(String dateString) throws Exception {
 
         //given
         String username = "pet_owner";
@@ -259,7 +259,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllWeekExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_weekQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_weekQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -282,7 +282,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllWeekExpenses() when user hasn't expenses in this week")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInThisWeek() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesInThisWeek() throws Exception {
 
         ///given
         String username = "pet_owner";
@@ -305,7 +305,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllMonthExpenses() when user has expense with this month")
-    void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithMonth() throws Exception {
+    void should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithMonth() throws Exception {
 
         //given
         String username = "john_doe";
@@ -328,7 +328,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllMonthExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_monthQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_monthQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -351,7 +351,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllMonthExpenses() when user hasn't expenses with this month")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithMonth() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithMonth() throws Exception {
 
         ///given
         String username = "john_doe";
@@ -374,7 +374,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test addNewExpenseToUser() add expense")
-    void Should_AddExpenseToDatabase_AndReturn204StatusCode() throws Exception {
+    void should_AddExpenseToDatabase_AndReturn204StatusCode() throws Exception {
 
         //given
         String username = "john_doe";
@@ -407,7 +407,7 @@ class ExpenseControllerIntegrationTest {
     @ValueSource(strings = {"","  ", "         ", "sh","s","",
     "string with more than 40 characters, -------------------------- "})
     @DisplayName("Test addNewExpenseToUser() throw exception when name is empty or apart from range")
-    void Should_ThrowMethodArgumentNotValidException_When_EmptyName(String name) throws Exception {
+    void should_ThrowMethodArgumentNotValidException_When_EmptyName(String name) throws Exception {
 
         //given
         String username = "john_doe";
@@ -433,7 +433,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test addNewExpenseToUser() throw exception when too long description")
-    void Should_ThrowMethodArgumentNotValidException_When_TooLongDescription() throws Exception {
+    void should_ThrowMethodArgumentNotValidException_When_TooLongDescription() throws Exception {
 
         //given
         String username = "john_doe";
@@ -465,7 +465,7 @@ class ExpenseControllerIntegrationTest {
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @ValueSource(doubles = {-5.0,-0.11,1000001})
     @DisplayName("Test addNewExpenseToUser() throw exception when money value is out of range")
-    void Should_ThrowMethodArgumentNotValidException_When_MoneyValueOutOfRange(double moneyValue) throws Exception {
+    void should_ThrowMethodArgumentNotValidException_When_MoneyValueOutOfRange(double moneyValue) throws Exception {
 
         //given
         String username = "john_doe";
@@ -490,7 +490,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllYearExpenses() when user has expense with this year")
-    void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithYear() throws Exception {
+    void should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithYear() throws Exception {
 
         //given
         String username = "alice_wonder";
@@ -513,7 +513,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllYearExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_yearQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_yearQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -536,7 +536,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllYearExpenses() when user hasn't expenses with this year")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithYear() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithYear() throws Exception {
 
         ///given
         String username = "alice_wonder";
@@ -559,7 +559,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllPeriodExpenses() when user has expense in this period")
-    void Should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithPeriod() throws Exception {
+    void should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithPeriod() throws Exception {
 
         //given
         String username = "alice_wonder";
@@ -583,7 +583,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllPeriodExpenses() when user hasn't any expenses")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_periodQuery() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_periodQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
@@ -607,7 +607,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test findAllPeriodExpenses() when user hasn't expenses with this period")
-    void Should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithPeriod() throws Exception {
+    void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithPeriod() throws Exception {
 
         //given
         String username = "alice_wonder";

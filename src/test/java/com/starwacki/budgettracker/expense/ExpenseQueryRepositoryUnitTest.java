@@ -22,7 +22,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_usernameQuery() {
+    void should_ReturnEmptyList_usernameQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -38,7 +38,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpenses() when user has 4 expenses in database")
-    void Should_ReturnListWith4Elements() {
+    void should_ReturnListWith4Elements() {
 
         //given
         String username = "john_doe";
@@ -54,7 +54,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpenses() correct sorting by the newest")
-    void Should_ReturnListSortedByDate() {
+    void should_ReturnListSortedByDate() {
 
         //given
         String username = "john_doe";
@@ -80,7 +80,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user hasn't expense with this category")
-    void Should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
+    void should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -97,7 +97,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() when user has 2 expenses in this category")
-    void Should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
+    void should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -114,7 +114,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameExpensesWithThisExpenseCategory() correct sorting")
-    void Should_ReturnSortedByDateList_When_UserHasExpenseWithThisCategory() {
+    void should_ReturnSortedByDateList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -141,7 +141,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_dateQuery() {
+    void should_ReturnEmptyList_dateQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -158,7 +158,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayExpenses() when user hasn't any expense with this date")
-    void Should_ReturnEmptyList_When_UserHasNotExpensesWithThisDate() {
+    void should_ReturnEmptyList_When_UserHasNotExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -177,7 +177,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayExpenses() when user has 2 expenses with this date")
-    void Should_Return2ElementsList_When_UserHasExpensesWithThisDate() {
+    void should_Return2ElementsList_When_UserHasExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -194,7 +194,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_weekQuery() {
+    void should_ReturnEmptyList_weekQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -212,7 +212,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekExpenses() when user hasn't any expense in this week")
-    void Should_ReturnEmptyList_When_UserHasNotExpensesInThisWeek() {
+    void should_ReturnEmptyList_When_UserHasNotExpensesInThisWeek() {
 
         //given
         String username = "john_doe";
@@ -233,7 +233,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekExpenses() when user has 3 expenses in this week")
-    void Should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
+    void should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
 
         //given
         String username = "pet_owner";
@@ -251,7 +251,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_monthQuery() {
+    void should_ReturnEmptyList_monthQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -268,7 +268,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthExpenses() when user hasn't any expense in this month")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisMonth() {
+    void should_ReturnEmptyList_When_UserHasNotExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
@@ -287,7 +287,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthExpenses() when user has 3 expenses in this month")
-    void  Should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
+    void should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
@@ -304,7 +304,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllYearExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_yearQuery() {
+    void should_ReturnEmptyList_yearQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -321,7 +321,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllYearExpenses() when user hasn't any expense in this year")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesWithThisYear() {
+    void should_ReturnEmptyList_When_UserHasNotExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
@@ -340,7 +340,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAlYearExpenses() when user has 1 expenses in this year")
-    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisYear() {
+    void should_Return1ElementsList_When_UserHas1ExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
@@ -357,7 +357,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_PeriodQuery() {
+    void should_ReturnEmptyList_PeriodQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -375,7 +375,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodExpenses() when user hasn't any expense in this period")
-    void  Should_ReturnEmptyList_When_UserHasNotExpensesInThisPeriod() {
+    void should_ReturnEmptyList_When_UserHasNotExpensesInThisPeriod() {
 
         //given
         String username = "alice_wonder";
@@ -395,7 +395,7 @@ class ExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodExpenses() when user has 1 expense in this period")
-    void  Should_Return1ElementsList_When_UserHas1ExpensesWithThisPeriod() {
+    void should_Return1ElementsList_When_UserHas1ExpensesWithThisPeriod() {
 
         //given
         String username = "alice_wonder";

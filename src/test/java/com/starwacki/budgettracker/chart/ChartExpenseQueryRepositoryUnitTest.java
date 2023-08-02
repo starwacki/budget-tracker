@@ -20,7 +20,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_usernameQuery() {
+    void should_ReturnEmptyList_usernameQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -36,7 +36,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameGraphExpenses() when user has 4 expenses in database")
-    void Should_ReturnListWith4Elements() {
+    void should_ReturnListWith4Elements() {
 
         //given
         String username = "john_doe";
@@ -52,7 +52,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_expenseCategoryQuery() {
+    void should_ReturnEmptyList_expenseCategoryQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -70,7 +70,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't expense with this category")
-    void Should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
+    void should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -87,7 +87,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user has 2 expenses in this category")
-    void Should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
+    void should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
 
         //given
         String username = "john_doe";
@@ -104,7 +104,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_dateQuery() {
+    void should_ReturnEmptyList_dateQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -121,7 +121,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense with this date")
-    void Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisDate() {
+    void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -140,7 +140,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user has 2 expenses with this date")
-    void Should_Return2ElementsList_When_UserHasGraphExpensesWithThisDate() {
+    void should_Return2ElementsList_When_UserHasGraphExpensesWithThisDate() {
 
         //given
         String username = "john_doe";
@@ -157,7 +157,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_weekQuery() {
+    void should_ReturnEmptyList_weekQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -175,7 +175,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in this week")
-    void Should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisWeek() {
+    void should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisWeek() {
 
         //given
         String username = "john_doe";
@@ -195,7 +195,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user has 3 expenses in this week")
-    void Should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
+    void should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
 
         //given
         String username = "pet_owner";
@@ -213,7 +213,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_monthQuery() {
+    void should_ReturnEmptyList_monthQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -230,7 +230,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in this month")
-    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisMonth() {
+    void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
@@ -249,7 +249,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user has 3 expenses in this month")
-    void  Should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
+    void should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
 
         //given
         String username = "john_doe";
@@ -266,7 +266,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_yearQuery() {
+    void should_ReturnEmptyList_yearQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -283,7 +283,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in this year")
-    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisYear() {
+    void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
@@ -302,7 +302,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user has 1 expenses in this year")
-    void  Should_Return1ElementsList_When_UserHas1GraphExpensesWithThisYear() {
+    void should_Return1ElementsList_When_UserHas1GraphExpensesWithThisYear() {
 
         //given
         String username = "alice_wonder";
@@ -319,7 +319,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in database")
-    void Should_ReturnEmptyList_PeriodQuery() {
+    void should_ReturnEmptyList_PeriodQuery() {
 
         //given
         String username = "user_with_zero_expenses";
@@ -337,7 +337,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in this period")
-    void  Should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisPeriod() {
+    void should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisPeriod() {
 
         //given
         String username = "alice_wonder";
@@ -357,7 +357,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     @Test
     @Sql("classpath:data.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user has 1 expense in this period")
-    void  Should_Return1ElementsList_When_UserHas1GraphExpensesWithThisPeriod() {
+    void should_Return1ElementsList_When_UserHas1GraphExpensesWithThisPeriod() {
 
         //given
         String username = "alice_wonder";
@@ -371,10 +371,4 @@ class ChartExpenseQueryRepositoryUnitTest {
         //then
         assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
     }
-
-
-
-
-
-
 }
