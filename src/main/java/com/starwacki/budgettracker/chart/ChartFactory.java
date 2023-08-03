@@ -2,7 +2,6 @@ package com.starwacki.budgettracker.chart;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @RequiredArgsConstructor

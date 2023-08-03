@@ -35,9 +35,6 @@ class ExpenseControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private ExpenseRepository expenseRepository;
-
-    @Autowired
     private ExpenseQueryRepository expenseQueryRepository;
 
 
@@ -61,7 +58,6 @@ class ExpenseControllerIntegrationTest {
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
-                    System.out.println(result.getResponse().getContentAsString());
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
                     List<ExpenseDTO> expenses = objectMapper.readValue(result.getResponse().getContentAsString(), typeReference);
                     assertEquals(expectedExpensesSize,expenses.size());
