@@ -14,17 +14,5 @@ abstract class Chart<T> {
         this.expenses = expenses;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Chart<?> chart = (Chart<?>) o;
-        return Objects.equals(expenses, chart.expenses);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(expenses);
-    }
 
 }

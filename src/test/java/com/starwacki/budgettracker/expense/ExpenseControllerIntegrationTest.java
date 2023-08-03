@@ -18,7 +18,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -397,6 +403,43 @@ class ExpenseControllerIntegrationTest {
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(), HttpStatus.CREATED.value()));
     }
 
+    @Test
+    @Sql("classpath:data.sql")
+    @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Test addNewExpenseToUser() add expense and ignore given id")
+    void should_IgnoreGivenId_AndAddExpenseToDatabase_AndReturn204StatusCode() throws Exception {
+
+        //given
+        String username = "john_doe";
+        ExpenseDTO expenseDTO = ExpenseDTO
+                .builder()
+                .id(100L)
+                .name("NEW_EXPENSE")
+                .description("DESCRIPTION")
+                .date(LocalDate.of(2020,10,1))
+                .time(LocalTime.of(15,41))
+                .expenseCategory(ExpenseCategory.CAR)
+                .moneyValue(20.0)
+                .build();
+
+        //when
+        int beforeAddUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
+
+        //then
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username).content(objectMapper.writeValueAsString(expenseDTO))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(result -> {
+
+                    int actualUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
+                    assertNotEquals(beforeAddUserExpenses,actualUserExpenses);
+
+                    HashSet<ExpenseDTO> expenseDTOS = new HashSet<>(expenseQueryRepository.findAllUsernameExpenses(username));
+                    assertFalse(expenseDTOS.contains(expenseDTO));
+
+                })
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(), HttpStatus.CREATED.value()));
+    }
+
     @ParameterizedTest
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -622,6 +665,37 @@ class ExpenseControllerIntegrationTest {
                     assertEquals(expectedExpensesSize,expenses.size());
                 });
     }
+
+    @Test
+    @Sql("classpath:data.sql")
+    @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Test getExpenseById() when expense exist")
+    void should_Return200StatusCodeAndExpense_WhenExpenseExist() throws Exception {
+
+        //given
+        String username = "alice_wonder";
+        ExpenseDTO existExpense = expenseQueryRepository.findAllUsernameExpenses(username).get(0);
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/id="+existExpense.id()))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
+                .andExpect(result -> assertThat(existExpense.toString(), is(equalTo(existExpense.toString()))));
+    }
+
+    @Test
+    @DisplayName("Test getExpenseById() when expense no exist")
+    void should_Return404StatusCode_WhenExpenseNoExist() throws Exception {
+
+        //given
+        long noExistExpenseId = 0;
+
+        //then
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/id="+noExistExpenseId))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.NOT_FOUND.value()));
+    }
+
+
+
 
 
 }

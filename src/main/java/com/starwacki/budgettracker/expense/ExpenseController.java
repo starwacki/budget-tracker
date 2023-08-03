@@ -62,4 +62,11 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/id={id}")
+    public ResponseEntity<?> getExpenseById(@PathVariable Long id) {
+        return expenseQueryRepository.findExpenseById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

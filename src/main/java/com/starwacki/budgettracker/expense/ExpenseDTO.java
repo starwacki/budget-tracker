@@ -1,5 +1,6 @@
 package com.starwacki.budgettracker.expense;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
@@ -10,6 +11,8 @@ import java.time.LocalTime;
 
 @Builder
 record ExpenseDTO(
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        Long id,
         @NotBlank(message = "The Name of expense shouldn't be empty!")
         @Length(min = 3,max = 40, message = "Name of expense should have between 3 and 40 characters")
         String name,

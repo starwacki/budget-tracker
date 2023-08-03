@@ -9,6 +9,11 @@ import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -18,6 +23,9 @@ class ExpenseQueryRepositoryUnitTest {
 
     @Autowired
     private ExpenseQueryRepository expenseQueryRepository;
+
+    @Autowired
+    private ExpenseRepository expenseRepository;
 
     @Test
     @Sql("classpath:data.sql")
@@ -410,7 +418,37 @@ class ExpenseQueryRepositoryUnitTest {
         assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
     }
 
+    @Test
+    @Sql("classpath:data.sql")
+    @DisplayName("Test findExpenseById() return expense  when expense exist")
+    void should_ReturnExpense() {
 
+        //given
+        String username = "username";
+        ExpenseFactory expenseFactory  = new ExpenseFactory();
+        Expense expense = expenseFactory.createExpenseFromExpenseDTOAndUsername(
+                ExpenseDTO.builder().name("NAME").build(),username
+        );
+        Long id = expenseRepository.save(expense).getId();
 
+        //when
+        ExpenseDTO expectedExpense = expenseQueryRepository.findExpenseById(id).get();
+
+        assertThat(expectedExpense.name(),is(equalTo(expense.getName())));
+
+    }
+
+    @Test
+    @DisplayName("Test findExpenseById() return Optional  when expense no exist")
+    void should_ReturnOptional() {
+
+        //given
+        Long id = 0L;
+
+        //when
+        Optional<ExpenseDTO> expectedExpense = expenseQueryRepository.findExpenseById(id);
+
+        assertThat(expectedExpense,is(Optional.empty()));
+    }
 
 }
