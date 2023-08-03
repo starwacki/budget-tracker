@@ -20,14 +20,14 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -394,7 +394,8 @@ class ExpenseControllerIntegrationTest {
         int beforeAddUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username).content(objectMapper.writeValueAsString(expenseDTO))
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+                        .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> {
                     int actualUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
@@ -694,8 +695,61 @@ class ExpenseControllerIntegrationTest {
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.NOT_FOUND.value()));
     }
 
+    @Test
+    @Sql("classpath:data.sql")
+    @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Test updateExpenseById() when expense exist")
+    void should_Return204StatusCode_AndUpdateExpense() throws Exception {
 
+        //given
+        String username = "alice_wonder";
+        ExpenseDTO existExpense = expenseQueryRepository.findAllUsernameExpenses(username).get(0);
+        long id = existExpense.id();
+        ExpenseDTO updateExpense = ExpenseDTO
+                .builder()
+                .date(LocalDate.of(2022,1,13))
+                .name("UPDATED_EXPENSE")
+                .description("DESCRIP")
+                .moneyValue(12.0)
+                .expenseCategory(ExpenseCategory.CAR)
+                .time(LocalTime.of(11,12))
+                .build();
 
+        //then
+        int actualUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
+        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/id="+id)
+                        .content(objectMapper.writeValueAsString(updateExpense))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        )
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.NO_CONTENT.value()));
 
+        int userExpensesAfterUpdate = expenseQueryRepository.findAllUsernameExpenses(username).size();
+        assertThat(actualUserExpenses,is(userExpensesAfterUpdate));
+    }
 
+    @Test
+    @DisplayName("Test updateExpenseById() when expense no exist")
+    void should_throwResourceNotFoundException_AndReturn404StatusCode() throws Exception {
+
+        //given
+        long id = 0;
+        ExpenseDTO updateExpense = ExpenseDTO
+                .builder()
+                .date(LocalDate.of(2022,1,13))
+                .name("UPDATED_EXPENSE")
+                .description("DESCRIP")
+                .moneyValue(12.0)
+                .expenseCategory(ExpenseCategory.CAR)
+                .time(LocalTime.of(11,12))
+                .build();
+
+        //then
+        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/id="+id)
+                        .content(objectMapper.writeValueAsString(updateExpense))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
+                .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.NOT_FOUND.value()))));
+    }
+    
 }
