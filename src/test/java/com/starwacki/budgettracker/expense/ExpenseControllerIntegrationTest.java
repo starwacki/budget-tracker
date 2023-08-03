@@ -751,5 +751,4 @@ class ExpenseControllerIntegrationTest {
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.NOT_FOUND.value()))));
     }
-    
 }
