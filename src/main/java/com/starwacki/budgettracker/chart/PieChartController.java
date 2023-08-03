@@ -16,22 +16,23 @@ public class PieChartController {
     private final ChartService chartService;
 
     @GetMapping("/{username}")
-    public ResponseEntity<ChartDTO<String>> getPieChartOfAllUsernameCategoriesExpenses(@PathVariable String username) {
+    public ResponseEntity<ChartDTO<String>> getPieChartOfUsernameCategoriesExpenses(@PathVariable String username) {
         return ResponseEntity.ok(chartService.getPieChartOfAllUsernameCategoriesExpenses(username));
     }
 
     @GetMapping("/{username}/week={date}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(@PathVariable String username, LocalDate date) {
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(@PathVariable String username, @PathVariable LocalDate date) {
+        System.out.println(date);
         return ResponseEntity.ok(chartService.getPieChartOfUserWeekCategoriesExpenses(username,date));
     }
 
     @GetMapping("/{username}/month={month}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(@PathVariable String username, int month) {
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(@PathVariable String username, @PathVariable int month) {
         return ResponseEntity.ok(chartService.getPieChartOfUserMonthCategoriesExpenses(username,month));
     }
 
     @GetMapping("/{username}/year={year}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(@PathVariable String username, int year) {
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(@PathVariable String username, @PathVariable int year) {
         return ResponseEntity.ok(chartService.getPieChartOfUserYearCategoriesExpenses(username,year));
     }
 

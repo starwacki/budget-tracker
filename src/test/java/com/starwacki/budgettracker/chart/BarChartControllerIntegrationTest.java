@@ -114,11 +114,6 @@ class BarChartControllerIntegrationTest {
                 });
     }
 
-    /**
-     *
-     *
-     */
-
     @Test
     @Sql("classpath:data.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)

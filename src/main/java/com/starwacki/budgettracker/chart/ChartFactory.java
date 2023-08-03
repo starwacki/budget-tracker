@@ -17,7 +17,6 @@ class ChartFactory {
         return switch (type) {
             case DAILY -> barChartCreatorStrategy.createDaysBarChart(expenses);
             case MONTHLY -> barChartCreatorStrategy.createMonthsBarChart(expenses);
-            case EXPENSE_CATEGORY -> barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
         };
     }
 
@@ -29,7 +28,6 @@ class ChartFactory {
     enum BarChartType {
         DAILY,
         MONTHLY,
-        EXPENSE_CATEGORY,
     }
 
 }

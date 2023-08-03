@@ -371,4 +371,23 @@ class ChartExpenseQueryRepositoryUnitTest {
         //then
         assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
     }
+
+    @Test
+    @Sql("classpath:data.sql")
+    @DisplayName("Test findAllPeriodGraphExpenses() when given endDate is earlier than startDate")
+    void should_ReturnEmptyList_WhenEndDateIsEarlierThanStart() {
+
+        //given
+        String username = "alice_wonder";
+        LocalDate startDate = LocalDate.of(2024,10,19);
+        LocalDate endDate = LocalDate.of(2024,7,19);
+
+        //when
+        int actualNumberOfUserExpensesInThisPeriod = chartExpenseQueryRepository.findAllPeriodChartExpenses(username,startDate,endDate).size();
+        int expectedNumberOfUserExpensesInThisPeriod = 0;
+
+        //then
+        assertEquals(chartExpenseQueryRepository.findAllUsernameChartExpenses(username).size(),2);
+        assertEquals(expectedNumberOfUserExpensesInThisPeriod,actualNumberOfUserExpensesInThisPeriod);
+    }
 }

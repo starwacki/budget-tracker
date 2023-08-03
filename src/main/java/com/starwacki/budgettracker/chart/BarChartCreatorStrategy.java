@@ -17,9 +17,4 @@ class BarChartCreatorStrategy extends ChartCreatorStrategy  {
        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getDate().getMonth()));
     }
 
-    BarChart<String> createExpensiveCategoryBarChart(List<ChartExpense> expenses) {
-        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getExpenseCategory()));
-    }
-
-
 }

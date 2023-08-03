@@ -26,7 +26,7 @@ class BarChartCreatorStrategyUnitTest {
 
     @Test
     @DisplayName("Test createDaysBarChart() return empty hashmap when given empty list")
-    void should_ReturnEmptyWeeklyChart() {
+    void should_ReturnEmptyDailyChart() {
 
         //given
         List<ChartExpense> emptyList = new ArrayList<>();
@@ -38,25 +38,13 @@ class BarChartCreatorStrategyUnitTest {
 
     @Test
     @DisplayName("Test createMonthsBarChart() return empty hashmap when given empty list")
-    void should_ReturnEmptyYearlyChart() {
+    void should_ReturnEmptyMonthlyChart() {
 
         //given
         List<ChartExpense> emptyList = new ArrayList<>();
 
         //then
         BarChart<Month> chart = barChartCreatorStrategy.createMonthsBarChart(emptyList);
-        assertThat(chart.getExpenses().size(),is(0));
-    }
-
-    @Test
-    @DisplayName("Test createYearsBarChart() return empty hashmap when given empty list")
-    void should_ReturnEmptyExpensiveCategoryChart() {
-
-        //given
-        List<ChartExpense> emptyList = new ArrayList<>();
-
-        //then
-        BarChart<String> chart = barChartCreatorStrategy.createExpensiveCategoryBarChart(emptyList);
         assertThat(chart.getExpenses().size(),is(0));
     }
 
@@ -79,7 +67,7 @@ class BarChartCreatorStrategyUnitTest {
 
     @Test
     @DisplayName("Test createMonthsBarChart() return hashmap with 3 elements when given list of 3 months expenses")
-    void should_ReturnMonthlyChart() {
+    void should_ReturnDailyChart() {
 
         //given
         List<ChartExpense> expenses = List.of(
@@ -90,22 +78,6 @@ class BarChartCreatorStrategyUnitTest {
 
         //then
         BarChart<Month> actualChart = barChartCreatorStrategy.createMonthsBarChart(expenses);
-        assertThat(actualChart.getExpenses().size(),is(3));
-    }
-
-    @Test
-    @DisplayName("Test createExpensiveCategoryBarChart() return hashmap with 3 elements when given list of 3 categories expenses")
-    void should_ReturnExpensiveCategoryChart() {
-
-        //given
-        List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().expenseCategory("FOOD").build(),
-                ChartExpense.builder().expenseCategory("OTHER").build(),
-                ChartExpense.builder().expenseCategory("CAR").build()
-        );
-
-        //then
-        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
         assertThat(actualChart.getExpenses().size(),is(3));
     }
 
@@ -179,25 +151,5 @@ class BarChartCreatorStrategyUnitTest {
         assertThat(actualChart.getExpenses().get(Month.OCTOBER).getMoneyAmount(),is(10.5));
     }
 
-    @Test
-    @DisplayName("Test createExpensiveCategoryBarChart() return chart with correct money amount")
-    void should_ReturnCorrectMoneyAmount_expensiveCategoryBarChart() {
 
-        //given
-        List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(50).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(60).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(30).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(40).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,10,3)).expenseCategory("CAR").moneyValue(10.5).build()
-        );
-
-
-        //then
-        BarChart<String> actualChart = barChartCreatorStrategy.createExpensiveCategoryBarChart(expenses);
-        assertThat(actualChart.getExpenses().size(),is(3));
-        assertThat(actualChart.getExpenses().get("FOOD").getMoneyAmount(),is(110.0));
-        assertThat(actualChart.getExpenses().get("OTHER").getMoneyAmount(),is(70.0));
-        assertThat(actualChart.getExpenses().get("CAR").getMoneyAmount(),is(10.5));
-    }
 }
