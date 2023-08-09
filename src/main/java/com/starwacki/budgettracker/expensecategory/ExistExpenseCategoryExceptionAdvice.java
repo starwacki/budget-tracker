@@ -1,7 +1,5 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.expensecategory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +9,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-class ResourceNotFoundExceptionAdvice extends ResponseEntityExceptionHandler {
+class ExistExpenseCategoryExceptionAdvice extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = ResourceNotFoundException.class)
+    @ExceptionHandler(value = ExistExpenseCategoryException.class)
     public ResponseEntity<?> handleWebException(RuntimeException e, WebRequest webRequest) {
 
         String response = e.getMessage();
 
-        return handleExceptionInternal(e, response, HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
+        return handleExceptionInternal(e, response, HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 }
