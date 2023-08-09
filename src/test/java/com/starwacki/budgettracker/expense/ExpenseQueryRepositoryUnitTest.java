@@ -92,7 +92,7 @@ class ExpenseQueryRepositoryUnitTest {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.OTHER;
+        String expenseCategory = "OTHER";
 
         //when
         int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory).size();
@@ -109,7 +109,7 @@ class ExpenseQueryRepositoryUnitTest {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
+        String expenseCategory = "FOOD";
 
         //when
         int actualNumberOfUserExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory).size();
@@ -126,7 +126,7 @@ class ExpenseQueryRepositoryUnitTest {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
+        String expenseCategory = "FOOD";
 
         //when
         List<ExpenseDTO> userExpenses = expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory);

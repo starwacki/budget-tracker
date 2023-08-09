@@ -18,7 +18,7 @@ interface ExpenseQueryRepository extends Repository<Expense,Long> {
             "FROM Expense e " +
             "WHERE e.username = :username AND e.expenseCategory = :expenseCategory " +
             "ORDER BY e.date DESC, e.time DESC")
-    List<ExpenseDTO> findAllUsernameExpensesWithThisExpenseCategory(String username, ExpenseCategory expenseCategory);
+    List<ExpenseDTO> findAllUsernameExpensesWithThisExpenseCategory(String username, String expenseCategory);
 
     @Query("SELECT NEW com.starwacki.budgettracker.expense.ExpenseDTO(e.id,e.name,e.description, e.expenseCategory, e.date, e.time,e.moneyValue) " +
             "FROM Expense e " +

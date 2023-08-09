@@ -2,7 +2,6 @@ package com.starwacki.budgettracker.expense;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,7 +24,7 @@ class ExpenseFactoryUnitTest {
         ExpenseDTO expenseDTO = ExpenseDTO
                 .builder()
                 .name("NAME")
-                .expenseCategory(ExpenseCategory.FOOD)
+                .expenseCategory("FOOD")
                 .date(LocalDate.of(2023,10,12))
                 .moneyValue(200.0)
                 .description("DESC")
@@ -37,7 +36,7 @@ class ExpenseFactoryUnitTest {
         Expense expense = expenseFactory.createExpenseFromExpenseDTOAndUsername(expenseDTO,username);
 
         //then
-        assertThat(expense.getExpenseCategory(),is(ExpenseCategory.FOOD));
+        assertThat(expense.getExpenseCategory(),is("FOOD"));
         assertThat(expense.getDate(),is(LocalDate.of(2023,10,12)));
         assertThat(expense.getTime(),is(LocalTime.of(20,12)));
         assertThat(expense.getDescription(),is("DESC"));

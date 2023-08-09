@@ -24,8 +24,7 @@ class Expense {
 
     private String username;
 
-    @Enumerated(value = EnumType.STRING)
-    private ExpenseCategory expenseCategory;
+    private String expenseCategory;
 
     private LocalDate date;
 

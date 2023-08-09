@@ -27,7 +27,7 @@ public class ExpenseController {
     }
 
     @GetMapping("/{username}/category={expenseCategory}")
-    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(@PathVariable String username,@PathVariable ExpenseCategory expenseCategory) {
+    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(@PathVariable String username,@PathVariable String expenseCategory) {
         return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory));
     }
 

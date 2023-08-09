@@ -20,8 +20,6 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -100,7 +98,7 @@ class ExpenseControllerIntegrationTest {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
+        String expenseCategory = "FOOD";
 
         //when
         int expectedExpensesSize = 2;
@@ -123,7 +121,7 @@ class ExpenseControllerIntegrationTest {
 
         //given
         String username = "user_without_any_expenses";
-        ExpenseCategory expenseCategory = ExpenseCategory.FOOD;
+        String expenseCategory = "FOOD";
 
         //when
         int expectedExpensesSize = 0;
@@ -146,14 +144,16 @@ class ExpenseControllerIntegrationTest {
 
         //given
         String username = "john_doe";
-        ExpenseCategory expenseCategory = ExpenseCategory.ANIMALS;
+        String expenseCategory = "OTHER";
 
         //when
         int expectedExpensesSize = 0;
 
         //then
+
         //(check that user has any expenses)
         assertNotEquals(0, expenseQueryRepository.findAllUsernameExpenses(username).size());
+
         mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
@@ -386,7 +386,7 @@ class ExpenseControllerIntegrationTest {
                 .description("DESCRIPTION")
                 .date(LocalDate.of(2020,10,1))
                 .time(LocalTime.of(15,41))
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .moneyValue(20.0)
                 .build();
 
@@ -419,7 +419,7 @@ class ExpenseControllerIntegrationTest {
                 .description("DESCRIPTION")
                 .date(LocalDate.of(2020,10,1))
                 .time(LocalTime.of(15,41))
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .moneyValue(20.0)
                 .build();
 
@@ -457,7 +457,7 @@ class ExpenseControllerIntegrationTest {
                 .description("3443")
                 .date(LocalDate.of(2020,10,1))
                 .time(LocalTime.of(15,41))
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .moneyValue(20.0)
                 .build();
 
@@ -489,7 +489,7 @@ class ExpenseControllerIntegrationTest {
                 .description(description)
                 .date(LocalDate.of(2020,10,1))
                 .time(LocalTime.of(15,41))
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .moneyValue(20.0)
                 .build();
 
@@ -515,7 +515,7 @@ class ExpenseControllerIntegrationTest {
                 .description("3443")
                 .date(LocalDate.of(2020,10,1))
                 .time(LocalTime.of(15,41))
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .moneyValue(moneyValue)
                 .build();
 
@@ -711,7 +711,7 @@ class ExpenseControllerIntegrationTest {
                 .name("UPDATED_EXPENSE")
                 .description("DESCRIP")
                 .moneyValue(12.0)
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .time(LocalTime.of(11,12))
                 .build();
 
@@ -739,7 +739,7 @@ class ExpenseControllerIntegrationTest {
                 .name("UPDATED_EXPENSE")
                 .description("DESCRIP")
                 .moneyValue(12.0)
-                .expenseCategory(ExpenseCategory.CAR)
+                .expenseCategory("CAR")
                 .time(LocalTime.of(11,12))
                 .build();
 

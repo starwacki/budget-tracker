@@ -1,4 +1,4 @@
-package com.starwacki.budgettracker.expense;
+package com.starwacki.budgettracker.expensecategory;
 
 enum ExpenseCategory {
 

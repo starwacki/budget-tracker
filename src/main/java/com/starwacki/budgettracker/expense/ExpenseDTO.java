@@ -5,7 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,7 +17,7 @@ record ExpenseDTO(
         String name,
         @Length(max = 200,message = "The Description should less than 200 characters")
         String description,
-        ExpenseCategory expenseCategory,
+        String expenseCategory,
         LocalDate date,
         LocalTime time,
         @Range(min = 0,max = 1000000, message = "Money value should have values between 0 and 1000000")
