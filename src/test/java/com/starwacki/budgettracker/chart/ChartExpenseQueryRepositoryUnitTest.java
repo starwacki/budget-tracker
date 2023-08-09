@@ -18,7 +18,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     private ChartExpenseQueryRepository chartExpenseQueryRepository;
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllUsernameGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_usernameQuery() {
 
@@ -34,7 +34,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllUsernameGraphExpenses() when user has 4 expenses in database")
     void should_ReturnListWith4Elements() {
 
@@ -50,7 +50,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't any expense in database")
     void should_ReturnEmptyList_expenseCategoryQuery() {
 
@@ -68,7 +68,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user hasn't expense with this category")
     void should_ReturnEmptyList_When_UserHasNotExpenseWithThisCategory() {
 
@@ -85,7 +85,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllUsernameGraphExpensesWithThisExpenseCategory() when user has 2 expenses in this category")
     void should_Return2ElementsList_When_UserHasExpenseWithThisCategory() {
 
@@ -102,7 +102,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_dateQuery() {
 
@@ -119,7 +119,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user hasn't any expense with this date")
     void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisDate() {
 
@@ -138,7 +138,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllDayGraphExpenses() when user has 2 expenses with this date")
     void should_Return2ElementsList_When_UserHasGraphExpensesWithThisDate() {
 
@@ -155,7 +155,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_weekQuery() {
 
@@ -173,7 +173,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user hasn't any expense in this week")
     void should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisWeek() {
 
@@ -193,7 +193,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllWeekGraphExpenses() when user has 3 expenses in this week")
     void should_Return2ElementsList_When_UserHasExpensesInThisWeek() {
 
@@ -211,7 +211,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_monthQuery() {
 
@@ -228,7 +228,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user hasn't any expense in this month")
     void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisMonth() {
 
@@ -247,7 +247,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllMonthGraphExpenses() when user has 3 expenses in this month")
     void should_Return3ElementsList_When_UserHas3ExpensesWithThisMonth() {
 
@@ -264,7 +264,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_yearQuery() {
 
@@ -281,7 +281,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user hasn't any expense in this year")
     void should_ReturnEmptyList_When_UserHasNotGraphExpensesWithThisYear() {
 
@@ -300,7 +300,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllYearGraphExpenses() when user has 1 expenses in this year")
     void should_Return1ElementsList_When_UserHas1GraphExpensesWithThisYear() {
 
@@ -317,7 +317,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in database")
     void should_ReturnEmptyList_PeriodQuery() {
 
@@ -335,7 +335,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user hasn't any expense in this period")
     void should_ReturnEmptyList_When_UserHasNotGraphExpensesInThisPeriod() {
 
@@ -355,7 +355,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when user has 1 expense in this period")
     void should_Return1ElementsList_When_UserHas1GraphExpensesWithThisPeriod() {
 
@@ -373,7 +373,7 @@ class ChartExpenseQueryRepositoryUnitTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @DisplayName("Test findAllPeriodGraphExpenses() when given endDate is earlier than startDate")
     void should_ReturnEmptyList_WhenEndDateIsEarlierThanStart() {
 

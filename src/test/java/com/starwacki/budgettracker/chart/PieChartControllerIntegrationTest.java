@@ -41,7 +41,7 @@ class PieChartControllerIntegrationTest {
 
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUsernameCategoriesExpenses()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndChartWithEmptyHashMap_WhenUserNoExist() throws Exception {
@@ -63,7 +63,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUsernameCategoriesExpenses()  when user has expenses in this week return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist() throws Exception {
@@ -94,7 +94,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserWeekCategoriesExpenses()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndChartWithEmptyHashMap_WhenUserNoExist_WeekExpenses() throws Exception {
@@ -117,7 +117,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserWeekCategoriesExpenses()  when user hasn't any expenses in this week return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyChart_WhenUserExist_WeekExpenses() throws Exception {
@@ -140,7 +140,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserWeekCategoriesExpenses()  when user has expenses in this week return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist_WeekExpenses() throws Exception {
@@ -172,7 +172,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserMonthCategoriesExpenses()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndChartWithEmptyHashMap_WhenUserNoExist_MonthExpenses() throws Exception {
@@ -195,7 +195,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserMonthCategoriesExpenses()  when user hasn't any expenses in this month return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyChart_WhenUserExist_MonthExpenses() throws Exception {
@@ -218,7 +218,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserMonthCategoriesExpenses()  when user has expenses in this month return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist_MonthExpenses() throws Exception {
@@ -250,7 +250,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserYearCategoriesExpenses()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndChartWithEmptyHashMap_WhenUserNoExist_YearExpenses() throws Exception {
@@ -273,7 +273,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserYearCategoriesExpenses()  when user hasn't any expenses in year return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyChart_WhenUserExist_YearExpenses() throws Exception {
@@ -296,7 +296,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserYearCategoriesExpenses()  when user has expenses in this year return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist_YearExpenses() throws Exception {
@@ -328,7 +328,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserPeriodCategoriesExpenses()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndChartWithEmptyHashMap_WhenUserNoExist_PeriodExpenses() throws Exception {
@@ -352,7 +352,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserPeriodCategoriesExpenses()  when user hasn't any expenses in this period return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyChart_WhenUserExist_PeriodExpenses() throws Exception {
@@ -376,7 +376,7 @@ class PieChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getPieChartOfUserPeriodCategoriesExpenses() when user has expenses in this period return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist_PeriodExpenses() throws Exception {

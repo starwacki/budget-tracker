@@ -40,7 +40,7 @@ class BarChartControllerIntegrationTest {
 
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getDailyBarChart()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndDailyChartWithEmptyHashMap_WhenUserNoExist() throws Exception {
@@ -63,7 +63,7 @@ class BarChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getDailyBarChart()  when user hasn't any expenses in this week return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyDailyChart_WhenUserExist() throws Exception {
@@ -86,7 +86,7 @@ class BarChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getDailyBarChart()  when user has expenses in this week return 200 HTTP Status code and chart")
     void should_Return200StatusAndDailyChart_WhenUserExist() throws Exception {
@@ -115,7 +115,7 @@ class BarChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getMonthlyBarChart()  when user has 0 expenses in database return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndMonthlyChartWithEmptyHashMap_WhenUserNoExist() throws Exception {
@@ -138,7 +138,7 @@ class BarChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getMonthlyBarChart()  when user hasn't any expenses in this year return 200 HTTP Status code and empty chart")
     void should_Return200StatusAndEmptyChart_WhenUserExist() throws Exception {
@@ -161,7 +161,7 @@ class BarChartControllerIntegrationTest {
     }
 
     @Test
-    @Sql("classpath:data.sql")
+    @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test getMonthlyBarChart()  when user has expenses in this year return 200 HTTP Status code and chart")
     void should_Return200StatusAndChart_WhenUserExist() throws Exception {
