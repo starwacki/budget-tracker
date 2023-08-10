@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/expense")
 @RequiredArgsConstructor
-@Validated
 public class ExpenseController {
 
     private final ExpenseService expenseService;
