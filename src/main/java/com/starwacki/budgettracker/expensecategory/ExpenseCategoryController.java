@@ -1,5 +1,6 @@
 package com.starwacki.budgettracker.expensecategory;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ExpenseCategoryController {
     }
 
     @PostMapping("/{username}")
-    public ResponseEntity<?> addNewUserExpenseCategory(@PathVariable String username, @RequestBody ExpenseCategoryDTO expenseCategoryDTO) {
+    public ResponseEntity<?> addNewUserExpenseCategory(@PathVariable String username, @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO) {
         expenseCategoryService.addNewUserExpenseCategory(username,expenseCategoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
