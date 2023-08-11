@@ -162,7 +162,7 @@ class RegistrationControllerIntegrationTest {
     @DisplayName("Test register() shouldn't register user when email already exist")
     @Sql("classpath:insert_users.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    void should_Return408StatusCode_AndNotRegisterUser_WhenEnailExist() throws Exception {
+    void should_Return408StatusCode_AndNotRegisterUser_WhenEmailExist() throws Exception {
 
         //given
         UserDTO userDTO =  new UserDTO("username1","email1@wp.pl","Pass123%");
