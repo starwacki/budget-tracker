@@ -2,3 +2,66 @@
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]EXPENSES"; oczekiwano "EXPLAIN, EXECUTE"
 Syntax error in SQL statement "[*]EXPENSES"; expected "EXPLAIN, EXECUTE"; SQL statement:
 EXPENSES [42001-214]
+2023-08-10 18:48:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-10 18:56:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-10 19:03:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-10 19:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-10 19:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-10 19:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-10 19:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-10 19:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"
+Syntax error in SQL statement "INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') [*]('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10')"; SQL statement:
+INSERT INTO users(username,email,password) VALUES ('username1','email1@wp.pl','password1') ('username2','email2@wp.pl','password2') ('username3','email3@wp.pl','password3') ('username4','email4@wp.pl','password4') ('username5','email5@wp.pl','password5') ('username6','email6@wp.pl','password6') ('username7','email7@wp.pl','password7') ('username8','email8@wp.pl','password8') ('username9','email9@wp.pl','password9') ('username10','email10@wp.pl','password10') [42000-214]
+2023-08-11 07:16:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:17:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:18:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:21:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:24:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:27:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:27:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:29:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:30:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:31:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-08-11 07:36:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]

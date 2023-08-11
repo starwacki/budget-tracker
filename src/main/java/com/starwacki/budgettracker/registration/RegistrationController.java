@@ -1,5 +1,6 @@
 package com.starwacki.budgettracker.registration;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping("/")
-    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO) {
         registrationService.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
