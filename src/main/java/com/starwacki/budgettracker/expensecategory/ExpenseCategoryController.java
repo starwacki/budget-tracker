@@ -17,18 +17,18 @@ public class ExpenseCategoryController {
 
     private final ExpenseCategoryQueryRepository expenseCategoryQueryRepository;
 
-    @GetMapping("/{username}")
+    @GetMapping("/v1/{username}")
     public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser(@PathVariable String username) {
         return ResponseEntity.ok(expenseCategoryService.getAllCategoriesBelongingToUser(username));
     }
 
-    @PostMapping("/{username}")
+    @PostMapping("/v1/{username}")
     public ResponseEntity<?> addNewUserExpenseCategory(@PathVariable String username, @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO) {
         expenseCategoryService.addNewUserExpenseCategory(username,expenseCategoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/v1/user/{username}")
     public ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(@PathVariable String username) {
         return ResponseEntity.ok(expenseCategoryQueryRepository.findAllExpenseCategoriesCreatedByUser(username));
     }

@@ -58,7 +58,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .stream(ExpenseCategory.values()).map(ExpenseCategoryMapper::mapEnumToDTO).toList();
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.OK.value()))))
                 .andExpect(result -> {
 
@@ -91,7 +91,7 @@ class ExpenseCategoryControllerIntegrationTest {
 
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.OK.value()))))
                 .andExpect(result -> {
 
@@ -122,7 +122,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .findAllExpenseCategoriesCreatedByUser(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(expenseCategoryDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.CREATED.value())));
@@ -148,7 +148,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .findAllExpenseCategoriesCreatedByUser(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(expenseCategoryDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.CONFLICT.value())));
@@ -174,7 +174,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .findAllExpenseCategoriesCreatedByUser(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(expenseCategoryDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.CONFLICT.value())));
@@ -200,7 +200,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .findAllExpenseCategoriesCreatedByUser(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(expenseCategoryDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.BAD_REQUEST.value())));
@@ -227,7 +227,7 @@ class ExpenseCategoryControllerIntegrationTest {
                 .findAllExpenseCategoriesCreatedByUser(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(expenseCategoryDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.BAD_REQUEST.value())));
@@ -251,7 +251,7 @@ class ExpenseCategoryControllerIntegrationTest {
         List<ExpenseCategoryDTO> expectedUsernameCategories  = List.of();
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/user/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -282,7 +282,7 @@ class ExpenseCategoryControllerIntegrationTest {
         );
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/user/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 

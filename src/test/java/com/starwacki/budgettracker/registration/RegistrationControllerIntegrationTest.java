@@ -50,7 +50,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.BAD_REQUEST.value()))))
@@ -75,7 +75,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.BAD_REQUEST.value()))))
@@ -100,7 +100,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.BAD_REQUEST.value()))))
@@ -124,7 +124,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.CREATED.value()))));
@@ -147,7 +147,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.CONFLICT.value()))))
@@ -171,7 +171,7 @@ class RegistrationControllerIntegrationTest {
         int beforePostUsersSize = userRepository.findAll().size();
 
         //when
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/")
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.CONFLICT.value()))))

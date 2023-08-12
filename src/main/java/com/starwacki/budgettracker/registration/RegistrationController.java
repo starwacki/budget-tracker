@@ -16,7 +16,7 @@ class RegistrationController {
 
     private final RegistrationService registrationService;
 
-    @PostMapping("/")
+    @PostMapping("/v1/")
     public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO) {
         registrationService.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();

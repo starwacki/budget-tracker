@@ -2,10 +2,8 @@ package com.starwacki.budgettracker.chart;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -17,13 +15,13 @@ public class BarChartController {
 
     private final ChartService chartService;
 
-    @GetMapping("/{username}/week={date}")
-    public ResponseEntity<ChartDTO<DayOfWeek>> getDailyBarChart(@PathVariable String username, @PathVariable LocalDate date) {
-        return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInWeek(username,date));
+    @GetMapping(value = "/v1/{username}",params = "weekDate")
+    public ResponseEntity<ChartDTO<DayOfWeek>> getDailyBarChart(@PathVariable String username, @RequestParam LocalDate weekDate) {
+        return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInWeek(username,weekDate));
     }
 
-    @GetMapping("/{username}/year={year}")
-    public ResponseEntity<ChartDTO<Month>> getMonthlyBarChart(@PathVariable String username, @PathVariable int year) {
+    @GetMapping(value = "/v1/{username}",params = "year")
+    public ResponseEntity<ChartDTO<Month>> getMonthlyBarChart(@PathVariable String username, @RequestParam int year) {
         return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInYear(username,year));
     }
 

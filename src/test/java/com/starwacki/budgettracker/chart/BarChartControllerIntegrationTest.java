@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -50,7 +51,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -73,7 +74,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -96,7 +97,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,7,15);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -125,7 +126,7 @@ class BarChartControllerIntegrationTest {
         int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -148,7 +149,7 @@ class BarChartControllerIntegrationTest {
         int year = 2020;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -171,7 +172,7 @@ class BarChartControllerIntegrationTest {
         int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 

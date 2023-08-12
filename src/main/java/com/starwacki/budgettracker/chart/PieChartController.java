@@ -2,10 +2,8 @@ package com.starwacki.budgettracker.chart;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 
 @RestController
@@ -15,30 +13,29 @@ public class PieChartController {
 
     private final ChartService chartService;
 
-    @GetMapping("/{username}")
+    @GetMapping("/v1/{username}")
     public ResponseEntity<ChartDTO<String>> getPieChartOfUsernameCategoriesExpenses(@PathVariable String username) {
         return ResponseEntity.ok(chartService.getPieChartOfAllUsernameCategoriesExpenses(username));
     }
 
-    @GetMapping("/{username}/week={date}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(@PathVariable String username, @PathVariable LocalDate date) {
-        System.out.println(date);
-        return ResponseEntity.ok(chartService.getPieChartOfUserWeekCategoriesExpenses(username,date));
+    @GetMapping(value = "/v1/{username}",params = "weekDate")
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(@PathVariable String username, @RequestParam LocalDate weekDate) {
+        return ResponseEntity.ok(chartService.getPieChartOfUserWeekCategoriesExpenses(username,weekDate));
     }
 
-    @GetMapping("/{username}/month={month}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(@PathVariable String username, @PathVariable int month) {
+    @GetMapping(value = "/v1/{username}",params = "month")
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(@PathVariable String username, @RequestParam int month) {
         return ResponseEntity.ok(chartService.getPieChartOfUserMonthCategoriesExpenses(username,month));
     }
 
-    @GetMapping("/{username}/year={year}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(@PathVariable String username, @PathVariable int year) {
+    @GetMapping(value = "/v1/{username}",params = "year")
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(@PathVariable String username, @RequestParam int year) {
         return ResponseEntity.ok(chartService.getPieChartOfUserYearCategoriesExpenses(username,year));
     }
 
-    @GetMapping("/{username}/from={startDate}&to={endDate}")
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserPeriodCategoriesExpenses(@PathVariable String username, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
-        return ResponseEntity.ok(chartService.getPieChartOfUserPeriodCategoriesExpenses(username,startDate,endDate));
+    @GetMapping(value = "/v1/{username}",params = {"from","to"})
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserPeriodCategoriesExpenses(@PathVariable String username, @RequestParam LocalDate from, @RequestParam LocalDate to) {
+        return ResponseEntity.ok(chartService.getPieChartOfUserPeriodCategoriesExpenses(username,from,to));
     }
 
 }

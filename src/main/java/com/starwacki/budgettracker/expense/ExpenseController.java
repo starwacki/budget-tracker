@@ -13,65 +13,66 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/expense")
+@RequestMapping("/expenses")
 @RequiredArgsConstructor
 public class ExpenseController {
 
     private final ExpenseService expenseService;
     private final ExpenseQueryRepository expenseQueryRepository;
 
-    @GetMapping("/{username}")
-    public ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(@PathVariable String username) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpenses(username));
-    }
-
-    @GetMapping("/{username}/category={expenseCategory}")
-    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(@PathVariable String username,@PathVariable String expenseCategory) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,expenseCategory));
-    }
-
-    @GetMapping("/{username}/date={date}")
-    public ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(@PathVariable String username, @PathVariable LocalDate date) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllDayExpenses(username,date));
-    }
-
-    @GetMapping("/{username}/week={date}")
-    public ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate date) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllWeekExpenses(username, date.with(DayOfWeek.MONDAY), date.with(DayOfWeek.SUNDAY)));
-    }
-
-    @GetMapping("/{username}/month={monthOrder}")
-    public ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @PathVariable int monthOrder) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllMonthExpenses(username,monthOrder));
-    }
-
-    @GetMapping("/{username}/year={year}")
-    public ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @PathVariable int year) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllYearExpenses(username,year));
-    }
-
-    @GetMapping("/{username}/from={startDate}&to={endDate}")
-    public ResponseEntity<List<ExpenseDTO>> findAllPeriodExpenses(@PathVariable String username, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllPeriodExpenses(username,startDate,endDate));
-    }
-
-    @PostMapping("/{username}")
-    public ResponseEntity<?> addNewExpenseToUser(@RequestBody @Valid ExpenseDTO expenseDTO,@PathVariable String username) {
-        expenseService.addNewExpenseToUser(expenseDTO,username);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @GetMapping("/id={id}")
+    @GetMapping("/v1/id={id}")
     public ResponseEntity<?> getExpenseById(@PathVariable Long id) {
         return expenseQueryRepository.findExpenseById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/id={id}")
+    @PutMapping("/v1/id={id}")
     public ResponseEntity<?> updateExpenseById(@PathVariable Long id, @RequestBody ExpenseDTO updatedExpenseDTO) {
         expenseService.updateExpense(id,updatedExpenseDTO);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/v1/{username}")
+    public ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(@PathVariable String username) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpenses(username));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = "category")
+    public ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(@PathVariable String username,@RequestParam String category) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpensesWithThisExpenseCategory(username,category));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = "date")
+    public ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(@PathVariable String username, @RequestParam LocalDate date) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllDayExpenses(username,date));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = "weekDate")
+    public ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @RequestParam LocalDate weekDate) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllWeekExpenses(username, weekDate.with(DayOfWeek.MONDAY), weekDate.with(DayOfWeek.SUNDAY)));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = "month")
+    public ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @RequestParam int month) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllMonthExpenses(username,month));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = "year")
+    public ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @RequestParam int year) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllYearExpenses(username,year));
+    }
+
+    @GetMapping(value = "/v1/{username}",params = {"from","to"})
+    public ResponseEntity<List<ExpenseDTO>> findAllPeriodExpenses(@PathVariable String username, @RequestParam LocalDate from, @RequestParam LocalDate to) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllPeriodExpenses(username,from,to));
+    }
+
+    @PostMapping("/v1/{username}")
+    public ResponseEntity<?> addNewExpenseToUser(@RequestBody @Valid ExpenseDTO expenseDTO,@PathVariable String username) {
+        expenseService.addNewExpenseToUser(expenseDTO,username);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
 
 }

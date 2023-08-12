@@ -42,7 +42,7 @@ class ExpenseControllerIntegrationTest {
     private ExpenseQueryRepository expenseQueryRepository;
 
 
-    private static final String ENDPOINT_REQUEST_MAPPING = "/expense";
+    private static final String ENDPOINT_REQUEST_MAPPING = "/expenses";
 
     @Test
     @Sql("classpath:insert_expenses.sql")
@@ -59,7 +59,7 @@ class ExpenseControllerIntegrationTest {
 
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -81,7 +81,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -104,7 +104,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 2;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -127,7 +127,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -154,7 +154,7 @@ class ExpenseControllerIntegrationTest {
         //(check that user has any expenses)
         assertNotEquals(0, expenseQueryRepository.findAllUsernameExpenses(username).size());
 
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/category="+expenseCategory))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?category="+expenseCategory))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -178,7 +178,7 @@ class ExpenseControllerIntegrationTest {
 
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/date="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?date="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -201,7 +201,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/date="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?date="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -224,7 +224,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/date="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?date="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -248,7 +248,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 3;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -271,7 +271,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -294,7 +294,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/week="+date))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+date))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -317,7 +317,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 1;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/month="+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+monthOrdinal))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -340,7 +340,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/month="+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+monthOrdinal))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -363,7 +363,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/month="+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+monthOrdinal))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -394,7 +394,7 @@ class ExpenseControllerIntegrationTest {
         int beforeAddUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
                         .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> {
@@ -427,7 +427,8 @@ class ExpenseControllerIntegrationTest {
         int beforeAddUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/"+username).content(objectMapper.writeValueAsString(expenseDTO))
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING+"/v1/"+username)
+                        .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> {
 
@@ -462,7 +463,7 @@ class ExpenseControllerIntegrationTest {
                 .build();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/" + username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/v1/" + username)
                         .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException));
@@ -494,7 +495,7 @@ class ExpenseControllerIntegrationTest {
                 .build();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/" + username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/v1/" + username)
                         .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException));
@@ -520,7 +521,7 @@ class ExpenseControllerIntegrationTest {
                 .build();
 
         //then
-        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/" + username)
+        mockMvc.perform(post(ENDPOINT_REQUEST_MAPPING + "/v1/" + username)
                         .content(objectMapper.writeValueAsString(expenseDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException));
@@ -540,7 +541,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 1;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -563,7 +564,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -586,7 +587,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -610,7 +611,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 1;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -634,7 +635,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -658,7 +659,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/"+username+"/from="+fromDate+"&to="+toDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -678,7 +679,7 @@ class ExpenseControllerIntegrationTest {
         ExpenseDTO existExpense = expenseQueryRepository.findAllUsernameExpenses(username).get(0);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/id="+existExpense.id()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/id="+existExpense.id()))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> assertThat(existExpense.toString(), is(equalTo(existExpense.toString()))));
     }
@@ -693,7 +694,7 @@ class ExpenseControllerIntegrationTest {
         long noExistExpenseId = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/id="+noExistExpenseId))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/id="+noExistExpenseId))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.NOT_FOUND.value()));
     }
 
@@ -719,7 +720,7 @@ class ExpenseControllerIntegrationTest {
 
         //then
         int actualUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/id="+id)
+        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/v1/id="+id)
                         .content(objectMapper.writeValueAsString(updateExpense))
                         .contentType(MediaType.APPLICATION_JSON)
                         )
@@ -748,7 +749,7 @@ class ExpenseControllerIntegrationTest {
                 .build();
 
         //then
-        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/id="+id)
+        mockMvc.perform(put(ENDPOINT_REQUEST_MAPPING+"/v1/id="+id)
                         .content(objectMapper.writeValueAsString(updateExpense))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
