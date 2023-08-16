@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import java.time.DayOfWeek;
@@ -103,7 +102,7 @@ class PieChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -126,7 +125,7 @@ class PieChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -149,7 +148,7 @@ class PieChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,7,15);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -181,7 +180,7 @@ class PieChartControllerIntegrationTest {
         Month month= Month.DECEMBER;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -204,7 +203,7 @@ class PieChartControllerIntegrationTest {
         Month month= Month.DECEMBER;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -227,7 +226,7 @@ class PieChartControllerIntegrationTest {
         Month month= Month.JULY;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?month="+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -259,7 +258,7 @@ class PieChartControllerIntegrationTest {
         int year = 2020;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -282,7 +281,7 @@ class PieChartControllerIntegrationTest {
         int year = 2020;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -305,7 +304,7 @@ class PieChartControllerIntegrationTest {
         int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -338,7 +337,7 @@ class PieChartControllerIntegrationTest {
         LocalDate endDate = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+startDate+"&to="+endDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/period-chart?from="+startDate+"&to="+endDate))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -362,7 +361,7 @@ class PieChartControllerIntegrationTest {
         LocalDate endDate = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+startDate+"&to="+endDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/period-chart?from="+startDate+"&to="+endDate))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -386,7 +385,7 @@ class PieChartControllerIntegrationTest {
         LocalDate endDate = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?from="+startDate+"&to="+endDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/period-chart?from="+startDate+"&to="+endDate))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 

@@ -15,13 +15,13 @@ public class BarChartController {
 
     private final ChartService chartService;
 
-    @GetMapping(value = "/v1/{username}",params = "weekDate")
-    public ResponseEntity<ChartDTO<DayOfWeek>> getDailyBarChart(@PathVariable String username, @RequestParam LocalDate weekDate) {
+    @GetMapping(value = "/v1/{username}/week-chart/{weekDate}")
+    public ResponseEntity<ChartDTO<DayOfWeek>> getWeekBarChart(@PathVariable String username, @PathVariable LocalDate weekDate) {
         return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInWeek(username,weekDate));
     }
 
-    @GetMapping(value = "/v1/{username}",params = "year")
-    public ResponseEntity<ChartDTO<Month>> getMonthlyBarChart(@PathVariable String username, @RequestParam int year) {
+    @GetMapping(value = "/v1/{username}/year-chart/{year}")
+    public ResponseEntity<ChartDTO<Month>> getYearBarChart(@PathVariable String username, @PathVariable int year) {
         return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInYear(username,year));
     }
 

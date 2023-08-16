@@ -49,7 +49,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -72,7 +72,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,10,12);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -95,7 +95,7 @@ class BarChartControllerIntegrationTest {
         LocalDate dateOfWeek = LocalDate.of(2023,7,15);
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?weekDate="+dateOfWeek))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/week-chart/"+dateOfWeek))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -124,7 +124,7 @@ class BarChartControllerIntegrationTest {
         int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -147,7 +147,7 @@ class BarChartControllerIntegrationTest {
         int year = 2020;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -170,7 +170,7 @@ class BarChartControllerIntegrationTest {
         int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"?year="+year))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/year-chart/"+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 

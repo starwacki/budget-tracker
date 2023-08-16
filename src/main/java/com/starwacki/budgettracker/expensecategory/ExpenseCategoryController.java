@@ -28,7 +28,7 @@ public class ExpenseCategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/v1/user/{username}")
+    @GetMapping("/v1/user-categories/{username}")
     public ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(@PathVariable String username) {
         return ResponseEntity.ok(expenseCategoryQueryRepository.findAllExpenseCategoriesCreatedByUser(username));
     }

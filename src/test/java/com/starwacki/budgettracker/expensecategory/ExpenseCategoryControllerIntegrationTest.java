@@ -250,7 +250,7 @@ class ExpenseCategoryControllerIntegrationTest {
         List<ExpenseCategoryDTO> expectedUsernameCategories  = List.of();
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user-categories/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -281,7 +281,7 @@ class ExpenseCategoryControllerIntegrationTest {
         );
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user/"+username))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/user-categories/"+username))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
