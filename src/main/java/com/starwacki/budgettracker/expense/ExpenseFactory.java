@@ -13,8 +13,8 @@ class ExpenseFactory {
                 .moneyValue(expenseDTO.moneyValue())
                 .description(expenseDTO.description())
                 .expenseCategory(expenseDTO.expenseCategory())
-                .date(expenseDTO.date())
-                .time(expenseDTO.time())
+                .expenseDate(expenseDTO.date())
+                .expenseTime(expenseDTO.time())
                 .build();
     }
 }

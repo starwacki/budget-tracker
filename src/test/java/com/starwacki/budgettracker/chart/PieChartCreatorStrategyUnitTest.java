@@ -6,7 +6,6 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.text.DecimalFormat;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,11 +88,11 @@ class PieChartCreatorStrategyUnitTest {
 
         //given
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(50).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(60).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(30).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(40).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,10,3)).expenseCategory("CAR").moneyValue(10.5).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(50).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).expenseCategory("FOOD").moneyValue(60).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(30).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,9,2)).expenseCategory("OTHER").moneyValue(40).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,10,3)).expenseCategory("CAR").moneyValue(10.5).build()
         );
 
 

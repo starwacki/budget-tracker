@@ -10,11 +10,11 @@ import java.util.List;
 class BarChartCreatorStrategy extends ChartCreatorStrategy  {
 
     BarChart<DayOfWeek> createDaysBarChart(List<ChartExpense> expenses) {
-        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getDate().getDayOfWeek()));
+        return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getExpenseDate().getDayOfWeek()));
     }
 
     BarChart<Month> createMonthsBarChart(List<ChartExpense> expenses) {
-       return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getDate().getMonth()));
+       return new BarChart<>(createChart(expenses,chartExpense -> chartExpense.getExpenseDate().getMonth()));
     }
 
 }

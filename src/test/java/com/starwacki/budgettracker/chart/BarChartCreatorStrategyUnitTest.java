@@ -54,9 +54,9 @@ class BarChartCreatorStrategyUnitTest {
 
         //given
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,2)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,3)).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,2)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,3)).build()
         );
 
         //then
@@ -71,9 +71,9 @@ class BarChartCreatorStrategyUnitTest {
 
         //given
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,10,3)).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,9,2)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,10,3)).build()
         );
 
         //then
@@ -89,11 +89,11 @@ class BarChartCreatorStrategyUnitTest {
         double maxValue = 100;
         double minValue = 10;
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,3)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,2)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,2)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,3)).moneyValue(ThreadLocalRandom.current().nextDouble(minValue,maxValue)).build()
         );
 
         //when
@@ -114,11 +114,11 @@ class BarChartCreatorStrategyUnitTest {
 
         //given
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(50).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(60).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(30).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,2)).moneyValue(40).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,3)).moneyValue(10.5).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(50).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(60).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,2)).moneyValue(30).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,2)).moneyValue(40).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,3)).moneyValue(10.5).build()
         );
 
         //then
@@ -135,11 +135,11 @@ class BarChartCreatorStrategyUnitTest {
 
         //given
         List<ChartExpense> expenses = List.of(
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(50).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,8,1)).moneyValue(60).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).moneyValue(30).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,9,2)).moneyValue(40).build(),
-                ChartExpense.builder().date(LocalDate.of(2023,10,3)).moneyValue(10.5).build()
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(50).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,8,1)).moneyValue(60).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,9,2)).moneyValue(30).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,9,2)).moneyValue(40).build(),
+                ChartExpense.builder().expenseDate(LocalDate.of(2023,10,3)).moneyValue(10.5).build()
         );
 
 

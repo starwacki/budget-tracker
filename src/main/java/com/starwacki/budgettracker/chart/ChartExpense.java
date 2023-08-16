@@ -25,9 +25,9 @@ class ChartExpense {
 
     private String expenseCategory;
 
-    private LocalDate date;
+    private LocalDate expenseDate;
 
-    private LocalTime time;
+    private LocalTime expenseTime;
 
     private double moneyValue;
 

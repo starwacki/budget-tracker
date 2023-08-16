@@ -26,17 +26,17 @@ class Expense {
 
     private String expenseCategory;
 
-    private LocalDate date;
+    private LocalDate expenseDate;
 
-    private LocalTime time;
+    private LocalTime expenseTime;
 
     private double moneyValue;
 
 
     void updateObject(ExpenseDTO expenseDTO) {
         this.name = expenseDTO.name();
-        this.date = expenseDTO.date();
-        this.time = expenseDTO.time();
+        this.expenseDate = expenseDTO.date();
+        this.expenseTime = expenseDTO.time();
         this.description = expenseDTO.description();
         this.moneyValue = expenseDTO.moneyValue();
         this.expenseCategory = expenseDTO.expenseCategory();

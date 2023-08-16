@@ -37,8 +37,8 @@ class ExpenseFactoryUnitTest {
 
         //then
         assertThat(expense.getExpenseCategory(),is("FOOD"));
-        assertThat(expense.getDate(),is(LocalDate.of(2023,10,12)));
-        assertThat(expense.getTime(),is(LocalTime.of(20,12)));
+        assertThat(expense.getExpenseDate(),is(LocalDate.of(2023,10,12)));
+        assertThat(expense.getExpenseTime(),is(LocalTime.of(20,12)));
         assertThat(expense.getDescription(),is("DESC"));
         assertThat(expense.getName(),is("NAME"));
         assertThat(expense.getUsername(),is("username"));

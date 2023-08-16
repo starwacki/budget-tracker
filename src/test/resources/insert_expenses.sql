@@ -3,13 +3,13 @@ CREATE TABLE IF NOT EXISTS expenses (
     name VARCHAR(255),
     description VARCHAR(255),
     username VARCHAR(255),
-    expense_category VARCHAR(255) CHECK (expense_category IN ('FOOD', 'HOME', 'ANIMALS', 'CAR', 'CLOTHES', 'HOBBY', 'DEBTS', 'EDUCATION', 'ENTERTAINMENT', 'OTHER')),
-    date DATE,
-    time TIME(6),
+    expense_category VARCHAR(255),
+    expense_date DATE,
+    expense_time TIME(6),
     money_value FLOAT(53) NOT NULL
 );
 
-INSERT INTO expenses (name, description, username, expense_category, date, time, money_value)
+INSERT INTO expenses (name, description, username, expense_category, expense_date, expense_time, money_value)
 VALUES
     ('Groceries', 'Weekly groceries shopping', 'john_doe', 'FOOD', '2023-07-15', '12:30:00', 75.99),
     ('Movie Tickets', 'Cinema tickets for a movie night', 'alice_wonder', 'ENTERTAINMENT', '2023-07-18', '20:15:00', 32.50),

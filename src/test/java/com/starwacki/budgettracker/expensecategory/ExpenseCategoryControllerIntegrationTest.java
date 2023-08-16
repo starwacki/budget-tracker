@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
-@ActiveProfiles("tests")
 @AutoConfigureMockMvc
 class ExpenseCategoryControllerIntegrationTest {
 
