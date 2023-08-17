@@ -10,18 +10,18 @@ import java.time.Month;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/barchart")
-public class BarChartController {
+@RequestMapping("/barchart/v1")
+public class BarChartController implements BarChartOperations {
 
     private final ChartService chartService;
 
-    @GetMapping(value = "/v1/{username}/week-chart/{weekDate}")
-    public ResponseEntity<ChartDTO<DayOfWeek>> getWeekBarChart(@PathVariable String username, @PathVariable LocalDate weekDate) {
+    @Override
+    public ResponseEntity<ChartDTO<DayOfWeek>> getWeekBarChart(String username , LocalDate weekDate) {
         return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInWeek(username,weekDate));
     }
 
-    @GetMapping(value = "/v1/{username}/year-chart/{year}")
-    public ResponseEntity<ChartDTO<Month>> getYearBarChart(@PathVariable String username, @PathVariable int year) {
+    @Override
+    public ResponseEntity<ChartDTO<Month>> getYearBarChart(String username, int year) {
         return ResponseEntity.ok(chartService.getBarChartOfUserExpensesInYear(username,year));
     }
 

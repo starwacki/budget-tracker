@@ -26,7 +26,6 @@ interface ExpenseOperations {
     @GetMapping("/{username}/date/{date}")
     ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(@PathVariable String username, @PathVariable LocalDate date);
 
-
     @GetMapping("/{username}/week/{weekDate}")
     ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate weekDate);
 
