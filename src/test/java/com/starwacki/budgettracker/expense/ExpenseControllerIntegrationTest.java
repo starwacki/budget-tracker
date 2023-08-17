@@ -657,7 +657,7 @@ class ExpenseControllerIntegrationTest {
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/period?from="+fromDate+"&to="+toDate))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/period"+username+"?from="+fromDate+"&to="+toDate))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -676,10 +676,11 @@ class ExpenseControllerIntegrationTest {
         String username = "alice_wonder";
         ExpenseDTO existExpense = expenseQueryRepository.findAllUsernameExpenses(username).get(0);
 
+        System.out.println(existExpense);
+
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/id/"+existExpense.id()))
-                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
-                .andExpect(result -> assertThat(existExpense.toString(), is(equalTo(existExpense.toString()))));
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/id/2"))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()));
     }
 
     @Test

@@ -53,5 +53,9 @@ interface ExpenseQueryRepository extends Repository<Expense,Long> {
     @Query("SELECT NEW com.starwacki.budgettracker.expense.ExpenseDTO(e.id,e.name,e.description, e.expenseCategory, e.expenseDate, e.expenseTime,e.moneyValue) " +
             "FROM Expense e " +
             "WHERE e.id = :id")
-    Optional<ExpenseDTO> findExpenseById(Long id);
+    Optional<ExpenseDTO> findById(Long id);
+
+
+
+
 }

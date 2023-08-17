@@ -430,7 +430,7 @@ class ExpenseQueryRepositoryUnitTest {
         Long id = expenseRepository.save(expense).getId();
 
         //when
-        ExpenseDTO expectedExpense = expenseQueryRepository.findExpenseById(id).get();
+        ExpenseDTO expectedExpense = expenseQueryRepository.findById(id).get();
 
         assertThat(expectedExpense.name(),is(equalTo(expense.getName())));
 
@@ -444,7 +444,7 @@ class ExpenseQueryRepositoryUnitTest {
         Long id = 0L;
 
         //when
-        Optional<ExpenseDTO> expectedExpense = expenseQueryRepository.findExpenseById(id);
+        Optional<ExpenseDTO> expectedExpense = expenseQueryRepository.findById(id);
 
         assertThat(expectedExpense,is(Optional.empty()));
     }
