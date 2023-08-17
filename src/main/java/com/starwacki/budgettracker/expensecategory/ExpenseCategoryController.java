@@ -10,25 +10,25 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/categories")
-public class ExpenseCategoryController {
+@RequestMapping("/categories/v1")
+public class ExpenseCategoryController implements ExpenseCategoryOperations {
 
     private final ExpenseCategoryService expenseCategoryService;
 
     private final ExpenseCategoryQueryRepository expenseCategoryQueryRepository;
 
-    @GetMapping("/v1/{username}")
-    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser(@PathVariable String username) {
+    @Override
+    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongToUser(@PathVariable String username) {
         return ResponseEntity.ok(expenseCategoryService.getAllCategoriesBelongingToUser(username));
     }
 
-    @PostMapping("/v1/{username}")
+    @Override
     public ResponseEntity<?> addNewUserExpenseCategory(@PathVariable String username, @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO) {
         expenseCategoryService.addNewUserExpenseCategory(username,expenseCategoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/v1/user-categories/{username}")
+    @Override
     public ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(@PathVariable String username) {
         return ResponseEntity.ok(expenseCategoryQueryRepository.findAllExpenseCategoriesCreatedByUser(username));
     }
