@@ -14,7 +14,7 @@ class RegistrationController implements RegisterOperations {
     private final RegistrationService registrationService;
 
     @Override
-    public ResponseEntity<?> register(UserDTO userDTO) {
+    public ResponseEntity<Void> register(UserDTO userDTO) {
         registrationService.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

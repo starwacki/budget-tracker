@@ -72,7 +72,6 @@ interface ExpenseOperations {
             ),
             responses = {
                     @ApiResponse(responseCode = "201",description = "Expense added successively."),
-                    @ApiResponse(responseCode = "400",description = "Bad request")
             }
 
     )
@@ -103,8 +102,7 @@ interface ExpenseOperations {
                           ),
             responses = {
                     @ApiResponse(responseCode = "204",description = "Expense updated successively."),
-                    @ApiResponse(responseCode = "404",description = "The updated expense should exist. This code is returned when something is wrong."),
-                    @ApiResponse(responseCode = "400",description = "Bad request")
+                    @ApiResponse(responseCode = "404",description = "The updated expense should exist. This code is returned when something is wrong.")
             }
     )
     @PutMapping("/id/{id}")
@@ -116,7 +114,7 @@ interface ExpenseOperations {
             summary =
                     "delete expense",
             parameters =
-            @Parameter(name = "id",description = "Expense id",example = "1",in = ParameterIn.PATH),
+                    @Parameter(name = "id",description = "Expense id",example = "1",in = ParameterIn.PATH),
             responses = {
                     @ApiResponse(responseCode = "204",description = "Expense deleted successively."),
                     @ApiResponse(responseCode = "404",description = "The deleted expense should exist!. This code is returned when something is wrong."),
@@ -242,6 +240,16 @@ interface ExpenseOperations {
                                             "    \"time\": \"15:40:13\",\n" +
                                             "    \"moneyValue\": 150\n" +
                                             "  }]")})),
+                    @ApiResponse(responseCode = "400",description = "Bad request",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(value =
+                                            "{\n" +
+                                                    "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
+                                                    "  \"status\": 400,\n" +
+                                                    "  \"error\": \"Bad Request\",\n" +
+                                                    "  \"path\": \"/expenses/v1/Username1/date/20231-13-25\"\n" +
+                                                    "}"
+                                    )}))
             }
     )
     @GetMapping("/{username}/date/{date}")

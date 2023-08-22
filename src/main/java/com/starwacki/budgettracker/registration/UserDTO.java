@@ -12,14 +12,14 @@ record UserDTO(
         @Email
         String email,
 
-        @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,25}$",
+        @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&.*-]).{6,25}$",
         message = "Password must include: \n" +
                   "At least 6 characters \n" +
                   "Maximum 25 characters" +
                   "Minimum one small letter \n" +
                   "Minimum one big letter \n " +
                   "Minimum one number \n " +
-                  "Minimum one special character: #?!@$%^&*-")
+                  "Minimum one special character: #?!@$%.^&*-")
         String password
 ) {
 }
