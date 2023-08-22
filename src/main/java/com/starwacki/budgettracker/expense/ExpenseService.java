@@ -28,4 +28,10 @@ class ExpenseService {
     }
 
 
+    public void deleteExpense(Long id) {
+        Optional<Expense> expense = expenseRepository.findById(id);
+        if (expense.isEmpty())
+            throw new ResourceNotFoundException(ExpenseService.class,"Expense not found");
+        expenseRepository.deleteById(id);
+    }
 }

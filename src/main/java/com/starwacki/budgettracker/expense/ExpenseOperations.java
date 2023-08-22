@@ -112,6 +112,21 @@ interface ExpenseOperations {
 
     @Operation(
             description =
+                    "This operation delete exist expense by given id",
+            summary =
+                    "delete expense",
+            parameters =
+            @Parameter(name = "id",description = "Expense id",example = "1",in = ParameterIn.PATH),
+            responses = {
+                    @ApiResponse(responseCode = "204",description = "Expense deleted successively."),
+                    @ApiResponse(responseCode = "404",description = "The deleted expense should exist!. This code is returned when something is wrong."),
+
+            })
+    @DeleteMapping("/id/{id}")
+    ResponseEntity<Void> deleteExpenseById(@PathVariable Long id);
+
+    @Operation(
+            description =
                     "This operation return list of user expenses. If username doesn't exist in database return empty list.",
             summary =
                     "Get user expenses",

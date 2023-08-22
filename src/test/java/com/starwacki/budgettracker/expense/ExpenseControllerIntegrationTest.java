@@ -20,8 +20,7 @@ import java.time.Month;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -733,7 +732,7 @@ class ExpenseControllerIntegrationTest {
     @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Test updateExpenseById() when expense no exist")
-    void should_throwResourceNotFoundException_AndReturn404StatusCode() throws Exception {
+    void should_throwResourceNotFoundException_AndReturn404StatusCode_updateExpense() throws Exception {
 
         //given
         long id = 0;
@@ -752,6 +751,43 @@ class ExpenseControllerIntegrationTest {
                         .content(objectMapper.writeValueAsString(updateExpense))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
+                .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.NOT_FOUND.value()))));
+    }
+
+    ///***
+
+    @Test
+    @Sql("classpath:insert_expenses.sql")
+    @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Test deleteExpenseById() when expense exist")
+    void should_Return204StatusCode_AndDeleteExpense() throws Exception {
+
+        //given
+        String username = "alice_wonder";
+        ExpenseDTO existExpense = expenseQueryRepository.findAllUsernameExpenses(username).get(0);
+        long id = existExpense.id();
+
+        //then
+        int actualUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
+        mockMvc.perform(delete(ENDPOINT_REQUEST_MAPPING+"/v1/id/"+id))
+                .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.NO_CONTENT.value()));
+
+        int userExpensesAfterUpdate = expenseQueryRepository.findAllUsernameExpenses(username).size();
+        assertThat(actualUserExpenses,is(not(userExpensesAfterUpdate)));
+    }
+
+    @Test
+    @Sql("classpath:insert_expenses.sql")
+    @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Test deleteExpenseById() when expense no exist")
+    void should_throwResourceNotFoundException_AndReturn404StatusCode_deleteExpense() throws Exception {
+
+        //given
+        long id = 0;
+
+        //then
+        mockMvc.perform(delete(ENDPOINT_REQUEST_MAPPING+"/v1/id/"+id))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(equalTo(HttpStatus.NOT_FOUND.value()))));
     }

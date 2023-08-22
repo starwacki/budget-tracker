@@ -30,6 +30,12 @@ class ExpenseController implements ExpenseOperations {
     }
 
     @Override
+    public ResponseEntity<Void> deleteExpenseById(Long id) {
+        expenseService.deleteExpense(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
     public ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(String username) {
         return ResponseEntity.ok(expenseQueryRepository.findAllUsernameExpenses(username));
     }
