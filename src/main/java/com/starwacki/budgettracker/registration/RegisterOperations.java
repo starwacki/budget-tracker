@@ -27,7 +27,7 @@ interface RegisterOperations {
                             required = true,
                             description = "UserDTO - user information",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                             "{\n" +
                                                     "  \"username\": \"Username1\",\n" +
                                                     "  \"email\": \"email1@wp.pl\",\n" +
@@ -39,7 +39,7 @@ interface RegisterOperations {
                     @ApiResponse(responseCode = "201",description = "User register successively."),
                     @ApiResponse(responseCode = "400",description = "Bad request",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                             "{\n" +
                                                     "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                                     "  \"status\": 400,\n" +
@@ -49,7 +49,7 @@ interface RegisterOperations {
                                     )})),
                     @ApiResponse(responseCode = "409",description = "Username or email exist.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                            "{\n" +
                                                    "  \"timestamp\": \"2023-08-22T19:00:02.044+00:00\",\n" +
                                                    "  \"status\": 409,\n" +

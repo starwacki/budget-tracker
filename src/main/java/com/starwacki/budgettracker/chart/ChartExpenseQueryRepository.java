@@ -34,7 +34,7 @@ interface ChartExpenseQueryRepository extends Repository<ChartExpense,Long> {
 
     @Query("SELECT c " +
             "FROM ChartExpense c " +
-            "WHERE c.username = :username AND FUNCTION('YEAR', c.expenseDate) = :year")
+            "WHERE c.username = :username AND YEAR(c.expenseDate) = :year")
     List<ChartExpense> findAllYearChartExpenses(String username, int year);
 
     @Query("SELECT c " +

@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ interface ExpenseOperations {
             responses = {
                     @ApiResponse(responseCode = "200",description = "Expense fetched successively.",
                             content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                                        "{\n" +
                                                           "  \"id\": 1,\n" +
                                                           "  \"name\": \"Object name\",\n" +
@@ -41,7 +43,7 @@ interface ExpenseOperations {
                                                           "}")})),
                     @ApiResponse(responseCode = "404",description = "Expense not found.",
                             content = @Content(contentSchema = @Schema(implementation = ExpenseDTO.class,contentMediaType = MediaType.APPLICATION_JSON_VALUE),
-                            examples = {@ExampleObject(value = "Expense not found")}))
+                                    examples = {@ExampleObject(value = "Expense not found")}))
             })
     @GetMapping("/id/{id}")
     ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable Long id);
@@ -133,7 +135,7 @@ interface ExpenseOperations {
             responses =
                     @ApiResponse(responseCode = "200",description = "Expenses fetched successively.",
                             content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -181,7 +183,7 @@ interface ExpenseOperations {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                             "[\n" +
                                                     "  {\n" +
                                                     "    \"id\": 2,\n" +
@@ -229,7 +231,7 @@ interface ExpenseOperations {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -270,7 +272,7 @@ interface ExpenseOperations {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -283,7 +285,7 @@ interface ExpenseOperations {
                                             "  }]")})),
                     @ApiResponse(responseCode = "400",description = "Bad request",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "{\n" +
                                             "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                             "  \"status\": 400,\n" +
@@ -295,6 +297,7 @@ interface ExpenseOperations {
     @GetMapping("/{username}/week/{weekDate}")
     ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate weekDate);
 
+    //TODO: CHANGE ONLY TO CURRENT YEAR!!
     @Operation(
             description =
                     "This operation return list of user expenses by given month . If username doesn't exist in database or " +
@@ -303,12 +306,12 @@ interface ExpenseOperations {
                     "Get user month expenses",
             parameters = {
                     @Parameter(name = "username",description = "User username",example = "Username1",in = ParameterIn.PATH),
-                    @Parameter(name = "month",description = "Month ordinal", example = "11",in = ParameterIn.PATH)
+                    @Parameter(name = "month",description = "Month ordinal - value between 1 and 12", example = "11",in = ParameterIn.PATH)
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -321,7 +324,7 @@ interface ExpenseOperations {
                                             "  }]")})),
                     @ApiResponse(responseCode = "400",description = "Bad request",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                examples = {@ExampleObject(value =
                                     "{\n" +
                                             "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                             "  \"status\": 400,\n" +
@@ -331,7 +334,7 @@ interface ExpenseOperations {
                             )}))            }
     )
     @GetMapping("/{username}/month/{month}")
-    ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @PathVariable int month);
+    ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @PathVariable @Min(value = 1) @Max(value = 12) int month);
 
     @Operation(
             description =
@@ -341,12 +344,12 @@ interface ExpenseOperations {
                     "Get user month expenses",
             parameters = {
                     @Parameter(name = "username",description = "User username",example = "Username1",in = ParameterIn.PATH),
-                    @Parameter(name = "year",description = "year", example = "2022",in = ParameterIn.PATH)
+                    @Parameter(name = "year",description = "Year - value between 2000 and 2050",example = "2020",in = ParameterIn.PATH)
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -359,7 +362,7 @@ interface ExpenseOperations {
                                             "  }]")})),
                     @ApiResponse(responseCode = "400",description = "Bad request",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "{\n" +
                                             "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                             "  \"status\": 400,\n" +
@@ -370,7 +373,7 @@ interface ExpenseOperations {
             }
     )
     @GetMapping("/{username}/year/{year}")
-    ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @PathVariable int year);
+    ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @PathVariable @Min(value = 2000) @Max(value = 2050) int year);
 
     @Operation(
             description =
@@ -386,7 +389,7 @@ interface ExpenseOperations {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "[\n" +
                                             "  {\n" +
                                             "    \"id\": 2,\n" +
@@ -399,12 +402,12 @@ interface ExpenseOperations {
                                             "  }]")})),
                     @ApiResponse(responseCode = "400",description = "Bad request",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            examples = {@ExampleObject(value =
+                                    examples = {@ExampleObject(value =
                                     "{\n" +
                                             "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                             "  \"status\": 400,\n" +
                                             "  \"error\": \"Bad Request\",\n" +
-                                            "  \"path\": \"/expenses/v1/Username1/week/2023-13-25\"\n" +
+                                            "  \"path\": \"/expenses/v1/Username1/period?from=20123-13-25&to=2020-10-12\"\n" +
                                             "}"
                                     )}))
             }
