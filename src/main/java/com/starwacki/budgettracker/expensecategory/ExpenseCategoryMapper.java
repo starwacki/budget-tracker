@@ -1,6 +1,6 @@
 package com.starwacki.budgettracker.expensecategory;
 
-class ExpenseCategoryMapper {
+final class ExpenseCategoryMapper {
 
     private ExpenseCategoryMapper(){};
 

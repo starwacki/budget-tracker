@@ -426,8 +426,7 @@ class ExpenseQueryRepositoryUnitTest {
 
         //given
         String username = "username";
-        ExpenseFactory expenseFactory  = new ExpenseFactory();
-        Expense expense = expenseFactory.createExpenseFromExpenseDTOAndUsername(
+        Expense expense = ExpenseMapper.mapExpenseDtoAndUsernameToExpense(
                 ExpenseDTO.builder().name("NAME").build(),username
         );
         Long id = expenseRepository.save(expense).getId();

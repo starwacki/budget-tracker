@@ -8,14 +8,7 @@ import java.time.LocalTime;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-class ExpenseFactoryUnitTest {
-
-    private ExpenseFactory expenseFactory;
-
-    @BeforeEach
-    void setUp() {
-        expenseFactory = new ExpenseFactory();
-    }
+class ExpenseMapperUnitTest {
 
     @Test
     void shouldReturn_Expense() {
@@ -33,7 +26,7 @@ class ExpenseFactoryUnitTest {
         String username = "username";
 
         //when
-        Expense expense = expenseFactory.createExpenseFromExpenseDTOAndUsername(expenseDTO,username);
+        Expense expense = ExpenseMapper.mapExpenseDtoAndUsernameToExpense(expenseDTO,username);
 
         //then
         assertThat(expense.getExpenseCategory(),is("FOOD"));

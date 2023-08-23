@@ -1,11 +1,11 @@
 package com.starwacki.budgettracker.expense;
 
-import org.springframework.stereotype.Component;
 
-@Component
-class ExpenseFactory {
+final class ExpenseMapper {
 
-    Expense createExpenseFromExpenseDTOAndUsername(ExpenseDTO expenseDTO, String username) {
+    private ExpenseMapper() {};
+
+    static Expense mapExpenseDtoAndUsernameToExpense(ExpenseDTO expenseDTO, String username) {
         return Expense
                 .builder()
                 .username(username)
