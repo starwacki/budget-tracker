@@ -59,7 +59,10 @@ interface BarChartOperations {
                                     )}))            }
     )
     @GetMapping(value = "/{username}/week-chart/{weekDate}")
-    ResponseEntity<ChartDTO<DayOfWeek>> getWeekBarChart(@PathVariable String username, @PathVariable LocalDate weekDate);
+    ResponseEntity<ChartDTO<DayOfWeek>> getWeekBarChart(
+            @PathVariable String username,
+            @PathVariable LocalDate weekDate
+    );
 
     @Operation(
             description =
@@ -100,5 +103,8 @@ interface BarChartOperations {
                                     )}))            }
     )
     @GetMapping(value = "/{username}/year-chart/{year}")
-    ResponseEntity<ChartDTO<Month>> getYearBarChart(@PathVariable String username, @PathVariable @Min(value = 2000) @Max(value = 2050) int year);
+    ResponseEntity<ChartDTO<Month>> getYearBarChart(
+            @PathVariable String username,
+            @PathVariable @Min(value = 2000) @Max(value = 2050) int year
+    );
 }

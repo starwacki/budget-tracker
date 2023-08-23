@@ -31,16 +31,6 @@ abstract class ChartCreatorStrategy {
         return chart;
     }
 
-
-    /**
-     * Operation to separation chart segments
-     */
-    @FunctionalInterface
-    interface ChartExpenseOperation<T> {
-        T doOperation(ChartExpense chartExpense);
-
-    }
-
     private <T> void fillChart(T bar, HashMap<T, ChartCategory> chart, ChartExpense chartExpense) {
         checkMapContainKey(bar, chart);
         addMoneyToChartCategory(chart, bar, chartExpense);

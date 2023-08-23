@@ -11,7 +11,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -68,7 +67,9 @@ interface ExpenseCategoryOperations {
                                                  "]")}))
             })
     @GetMapping("/{username}")
-    ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser(@PathVariable String username);
+    ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser(
+            @PathVariable String username
+    );
 
     @Operation(
             description =
@@ -118,7 +119,10 @@ interface ExpenseCategoryOperations {
 
     )
     @PostMapping("/{username}")
-    ResponseEntity<Void> addNewUserExpenseCategory(@PathVariable String username, @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO);
+    ResponseEntity<Void> addNewUserExpenseCategory(
+            @PathVariable String username,
+            @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO
+    );
 
     @Operation(
             description =
@@ -145,5 +149,7 @@ interface ExpenseCategoryOperations {
                                                   "]")}))
             })
     @GetMapping("/user-categories/{username}")
-    ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(@PathVariable String username);
+    ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(
+            @PathVariable String username
+    );
 }

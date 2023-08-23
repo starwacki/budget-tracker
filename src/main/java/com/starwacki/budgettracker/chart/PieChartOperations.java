@@ -46,7 +46,9 @@ interface PieChartOperations {
             }
     )
     @GetMapping("/{username}")
-    ResponseEntity<ChartDTO<String>> getPieChartOfUsernameCategoriesExpenses(@PathVariable String username);
+    ResponseEntity<ChartDTO<String>> getPieChartOfUsernameCategoriesExpenses(
+            @PathVariable String username
+    );
 
     @Operation(
             description =
@@ -85,9 +87,11 @@ interface PieChartOperations {
                                     )}))            }
     )
     @GetMapping(value = "/{username}/week-chart/{weekDate}")
-    ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(@PathVariable String username, @PathVariable LocalDate weekDate);
+    ResponseEntity<ChartDTO<String>>  getPieChartOfUserWeekCategoriesExpenses(
+            @PathVariable String username,
+            @PathVariable LocalDate weekDate
+    );
 
-    //TODO: CHANGE ONLY TO CURRENT YEAR!!
     @Operation(
             description =
                     "This operation return pie chart of user expenses by given month in given year. If username doesn't exist in database or " +
@@ -127,7 +131,8 @@ interface PieChartOperations {
     ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(
             @PathVariable String username,
             @RequestParam @Min(value = 1) @Max(value = 12) int month,
-            @RequestParam @Min(value = 2000) @Max(value = 2050) int year);
+            @RequestParam @Min(value = 2000) @Max(value = 2050) int year
+    );
 
     @Operation(
             description =
@@ -205,6 +210,10 @@ interface PieChartOperations {
                                     )}))            }
     )
     @GetMapping(value = "/{username}/period-chart",params = {"from","to"})
-    ResponseEntity<ChartDTO<String>>  getPieChartOfUserPeriodCategoriesExpenses(@PathVariable String username, @RequestParam LocalDate from, @RequestParam LocalDate to);
+    ResponseEntity<ChartDTO<String>>  getPieChartOfUserPeriodCategoriesExpenses(
+            @PathVariable String username,
+            @RequestParam LocalDate from,
+            @RequestParam LocalDate to
+    );
 
 }

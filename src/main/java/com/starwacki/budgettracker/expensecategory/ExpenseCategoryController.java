@@ -1,6 +1,5 @@
 package com.starwacki.budgettracker.expensecategory;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ public class ExpenseCategoryController implements ExpenseCategoryOperations {
     private final ExpenseCategoryQueryRepository expenseCategoryQueryRepository;
 
     @Override
-    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser( String username) {
+    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser(String username) {
         return ResponseEntity.ok(expenseCategoryService.getAllCategoriesBelongingToUser(username));
     }
 

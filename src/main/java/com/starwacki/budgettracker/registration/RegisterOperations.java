@@ -60,5 +60,7 @@ interface RegisterOperations {
             }
     )
     @PostMapping("/v1/")
-    ResponseEntity<Void> register(@Valid @RequestBody UserDTO userDTO);
+    ResponseEntity<Void> register(
+            @Valid @RequestBody UserDTO userDTO
+    );
 }

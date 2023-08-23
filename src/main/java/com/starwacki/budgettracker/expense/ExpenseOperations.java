@@ -46,7 +46,9 @@ interface ExpenseOperations {
                                     examples = {@ExampleObject(value = "Expense not found")}))
             })
     @GetMapping("/id/{id}")
-    ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable Long id);
+    ResponseEntity<ExpenseDTO> getExpenseById(
+            @PathVariable Long id
+    );
 
     @Operation(
             description =
@@ -78,7 +80,10 @@ interface ExpenseOperations {
 
     )
     @PostMapping("/{username}")
-    ResponseEntity<Void> addNewExpenseToUser(@RequestBody @Valid ExpenseDTO expenseDTO, @PathVariable String username);
+    ResponseEntity<Void> addNewExpenseToUser(
+            @RequestBody @Valid ExpenseDTO expenseDTO,
+            @PathVariable String username
+    );
 
     @Operation(
             description =
@@ -108,7 +113,10 @@ interface ExpenseOperations {
             }
     )
     @PutMapping("/id/{id}")
-    ResponseEntity<Void> updateExpenseById(@PathVariable Long id, @RequestBody ExpenseDTO updatedExpenseDTO);
+    ResponseEntity<Void> updateExpenseById(
+            @PathVariable Long id,
+            @RequestBody ExpenseDTO updatedExpenseDTO
+    );
 
     @Operation(
             description =
@@ -123,7 +131,9 @@ interface ExpenseOperations {
 
             })
     @DeleteMapping("/id/{id}")
-    ResponseEntity<Void> deleteExpenseById(@PathVariable Long id);
+    ResponseEntity<Void> deleteExpenseById(
+            @PathVariable Long id
+    );
 
     @Operation(
             description =
@@ -168,7 +178,9 @@ interface ExpenseOperations {
             )
     )
     @GetMapping("/{username}")
-    ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(@PathVariable String username);
+    ResponseEntity<List<ExpenseDTO>> findAllUsernameExpenses(
+            @PathVariable String username
+    );
 
     @Operation(
             description =
@@ -216,7 +228,10 @@ interface ExpenseOperations {
             }
     )
     @GetMapping("/{username}/category/{category}")
-    ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(@PathVariable String username,@PathVariable String category);
+    ResponseEntity<List<ExpenseDTO>> findAllExpensesByUsernameAndExpenseCategory(
+            @PathVariable String username,
+            @PathVariable String category
+    );
 
     @Operation(
             description =
@@ -255,7 +270,10 @@ interface ExpenseOperations {
             }
     )
     @GetMapping("/{username}/date/{date}")
-    ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(@PathVariable String username, @PathVariable LocalDate date);
+    ResponseEntity<List<ExpenseDTO>> findAllDayExpenses(
+            @PathVariable String username,
+            @PathVariable LocalDate date
+    );
 
     @Operation(
             description =
@@ -295,7 +313,10 @@ interface ExpenseOperations {
                             )}))            }
     )
     @GetMapping("/{username}/week/{weekDate}")
-    ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate weekDate);
+    ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(
+            @PathVariable String username,
+            @PathVariable LocalDate weekDate
+    );
 
     @Operation(
             description =
@@ -378,7 +399,10 @@ interface ExpenseOperations {
             }
     )
     @GetMapping("/{username}/year/{year}")
-    ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(@PathVariable String username, @PathVariable @Min(value = 2000) @Max(value = 2050) int year);
+    ResponseEntity<List<ExpenseDTO>> findAllYearExpenses(
+            @PathVariable String username,
+            @PathVariable @Min(value = 2000) @Max(value = 2050) int year
+    );
 
     @Operation(
             description =
@@ -418,6 +442,10 @@ interface ExpenseOperations {
             }
     )
     @GetMapping(value = "/{username}/period",params = {"from","to"})
-    ResponseEntity<List<ExpenseDTO>> findAllPeriodExpenses(@PathVariable String username, @RequestParam LocalDate from, @RequestParam LocalDate to);
+    ResponseEntity<List<ExpenseDTO>> findAllPeriodExpenses(
+            @PathVariable String username,
+            @RequestParam LocalDate from,
+            @RequestParam LocalDate to
+    );
 
 }
