@@ -18,18 +18,18 @@ public class ExpenseCategoryController implements ExpenseCategoryOperations {
     private final ExpenseCategoryQueryRepository expenseCategoryQueryRepository;
 
     @Override
-    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongToUser(@PathVariable String username) {
+    public ResponseEntity<List<ExpenseCategoryDTO>> getAllCategoriesBelongingToUser( String username) {
         return ResponseEntity.ok(expenseCategoryService.getAllCategoriesBelongingToUser(username));
     }
 
     @Override
-    public ResponseEntity<?> addNewUserExpenseCategory(@PathVariable String username, @Valid @RequestBody ExpenseCategoryDTO expenseCategoryDTO) {
+    public ResponseEntity<Void> addNewUserExpenseCategory(String username, ExpenseCategoryDTO expenseCategoryDTO) {
         expenseCategoryService.addNewUserExpenseCategory(username,expenseCategoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override
-    public ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories(@PathVariable String username) {
+    public ResponseEntity<List<ExpenseCategoryDTO>> getAllUserExpenseCategories( String username) {
         return ResponseEntity.ok(expenseCategoryQueryRepository.findAllExpenseCategoriesCreatedByUser(username));
     }
 
