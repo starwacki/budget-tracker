@@ -15,7 +15,7 @@ class ExpenseCategoryService {
     private final ExpenseCategoryRepository expenseCategoryRepository;
     private final ExpenseCategoryQueryRepository expenseCategoryQueryRepository;
     void addNewUserExpenseCategory(String username, ExpenseCategoryDTO dto) {
-        if (doesExpenseCategoryCanBeCreated(dto.categoryName()))
+        if (doesExpenseCategoryCanBeCreated(dto.categoryName(),username))
             expenseCategoryRepository.save(ExpenseCategoryMapper.mapDtoToEntity(username,dto));
         else
             throw new ExistExpenseCategoryException(dto.categoryName());
@@ -47,13 +47,13 @@ class ExpenseCategoryService {
                 .toList();
    }
 
-    private boolean doesExpenseCategoryCanBeCreated(String categoryName) {
+    private boolean doesExpenseCategoryCanBeCreated(String categoryName,String username) {
         return !doesExpenseCategoryExistInAppCategories(categoryName)
-                && !doesUserHaveExpenseCategory(categoryName);
+                && !doesUserHaveExpenseCategory(categoryName,username);
     }
 
-    private boolean doesUserHaveExpenseCategory(String categoryName) {
-        return expenseCategoryRepository.existsByCategoryName(categoryName);
+    private boolean doesUserHaveExpenseCategory(String categoryName,String username) {
+        return expenseCategoryRepository.existsByCategoryNameAndUsername(categoryName, username);
     }
 
     private boolean doesExpenseCategoryExistInAppCategories(String categoryName) {
