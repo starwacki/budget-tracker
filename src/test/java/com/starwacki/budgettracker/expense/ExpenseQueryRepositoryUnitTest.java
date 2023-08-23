@@ -262,9 +262,10 @@ class ExpenseQueryRepositoryUnitTest {
         //given
         String username = "user_with_zero_expenses";
         int monthOrdinal = 12;
+        int year = 2020;
 
         //when
-        int actualNumberOfUserExpenses = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfUserExpenses = expenseQueryRepository.findAllMonthExpensesInGivenYear(username,monthOrdinal,year).size();
         int expectedNumberOfUserExpenses = 0;
 
         //then
@@ -279,10 +280,11 @@ class ExpenseQueryRepositoryUnitTest {
         //given
         String username = "john_doe";
         int monthOrdinal = 12;
+        int year = 2023;
 
         //when
         int actualNumberOfAllUserExpenses = expenseQueryRepository.findAllUsernameExpenses(username).size();
-        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpensesInGivenYear(username,monthOrdinal,year).size();
         int expectedNumberOfUserExpensesInThisMonth = 0;
 
         //then
@@ -298,9 +300,10 @@ class ExpenseQueryRepositoryUnitTest {
         //given
         String username = "john_doe";
         int monthOrdinal = 7;
+        int year = 2023;
 
         //when
-        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpenses(username,monthOrdinal).size();
+        int actualNumberOfUserExpensesInThisMonth = expenseQueryRepository.findAllMonthExpensesInGivenYear(username,monthOrdinal,year).size();
         int expectedNumberOfUserExpensesInThisMonth = 3;
 
         //then

@@ -56,8 +56,8 @@ class ExpenseController implements ExpenseOperations {
     }
 
     @Override
-    public ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(String username, int month) {
-        return ResponseEntity.ok(expenseQueryRepository.findAllMonthExpenses(username,month));
+    public ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(String username, int month, int year) {
+        return ResponseEntity.ok(expenseQueryRepository.findAllMonthExpensesInGivenYear(username, month, year));
     }
 
     @Override

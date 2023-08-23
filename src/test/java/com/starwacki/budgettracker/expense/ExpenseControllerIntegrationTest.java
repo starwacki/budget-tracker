@@ -303,18 +303,19 @@ class ExpenseControllerIntegrationTest {
     @Test
     @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @DisplayName("Test findAllMonthExpenses() when user has expense with this month")
+    @DisplayName("Test findAllMonthExpensesInGiverYear() when user has expense with this month")
     void should_Return200StatusCodeAnd1ExpenseList_When_UserHas1ExpenseWithMonth() throws Exception {
 
         //given
         String username = "john_doe";
         int monthOrdinal = Month.APRIL.getValue();
+        int year = 2023;
 
         //when
         int expectedExpensesSize = 1;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month/"+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month?month="+monthOrdinal+"&year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -326,18 +327,19 @@ class ExpenseControllerIntegrationTest {
     @Test
     @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @DisplayName("Test findAllMonthExpenses() when user hasn't any expenses")
+    @DisplayName("Test findAllMonthExpensesInGivenYear() when user hasn't any expenses")
     void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotAnyExpenses_monthQuery() throws Exception {
 
         //given
         String username = "user_without_any_expenses";
         int monthOrdinal = Month.APRIL.getValue();
+        int year = 2023;
 
         //when
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month/"+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month?month="+monthOrdinal+"&year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),HttpStatus.OK.value()))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};
@@ -349,18 +351,19 @@ class ExpenseControllerIntegrationTest {
     @Test
     @Sql("classpath:insert_expenses.sql")
     @Sql(scripts = "classpath:clean-test-database.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @DisplayName("Test findAllMonthExpenses() when user hasn't expenses with this month")
+    @DisplayName("Test findAllMonthExpensesInGivenYear() when user hasn't expenses with this month")
     void should_Return200StatusCodeAnd0ExpensesList_When_UserHasNotExpensesWithMonth() throws Exception {
 
         ///given
         String username = "john_doe";
         int monthOrdinal = Month.FEBRUARY.getValue();
+        int year = 2023;
 
         //when
         int expectedExpensesSize = 0;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month/"+monthOrdinal))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month?month="+monthOrdinal+"&year="+year))
                 .andExpect(result -> assertEquals(result.getResponse().getStatus(),200))
                 .andExpect(result -> {
                     TypeReference<List<ExpenseDTO>> typeReference = new TypeReference<>() {};

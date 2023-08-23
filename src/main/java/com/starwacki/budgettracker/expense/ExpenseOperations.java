@@ -297,16 +297,17 @@ interface ExpenseOperations {
     @GetMapping("/{username}/week/{weekDate}")
     ResponseEntity<List<ExpenseDTO>> findAllWeekExpenses(@PathVariable String username, @PathVariable LocalDate weekDate);
 
-    //TODO: CHANGE ONLY TO CURRENT YEAR!!
     @Operation(
             description =
-                    "This operation return list of user expenses by given month . If username doesn't exist in database or " +
-                    "user doesn't have any expenses in this month return empty list.",
+                    "This operation return list of user expenses by given month in given year . If username doesn't exist in database or " +
+                    "user doesn't have any expenses in this time return empty list.",
             summary =
                     "Get user month expenses",
             parameters = {
                     @Parameter(name = "username",description = "User username",example = "Username1",in = ParameterIn.PATH),
-                    @Parameter(name = "month",description = "Month ordinal - value between 1 and 12", example = "11",in = ParameterIn.PATH)
+                    @Parameter(name = "month",description = "Month ordinal - value between 1 and 12", example = "11",in = ParameterIn.QUERY),
+                    @Parameter(name = "year",description = "Year - value between 2000 and 2050",example = "2020",in = ParameterIn.QUERY)
+
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Expenses fetched successively.",
@@ -329,12 +330,16 @@ interface ExpenseOperations {
                                             "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                             "  \"status\": 400,\n" +
                                             "  \"error\": \"Bad Request\",\n" +
-                                            "  \"path\": \"/expenses/v1/Username1/month/2023-13-25\"\n" +
+                                            "  \"path\": \"/expenses/v1/Username1/month?month=13&year=2022\"\n" +
                                             "}"
                             )}))            }
     )
-    @GetMapping("/{username}/month/{month}")
-    ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(@PathVariable String username, @PathVariable @Min(value = 1) @Max(value = 12) int month);
+    @GetMapping("/{username}/month")
+    ResponseEntity<List<ExpenseDTO>> findAllMonthExpenses(
+            @PathVariable String username,
+            @RequestParam @Min(value = 1) @Max(value = 12) int month,
+            @RequestParam @Min(value = 2000) @Max(value = 2050) int year
+    );
 
     @Operation(
             description =

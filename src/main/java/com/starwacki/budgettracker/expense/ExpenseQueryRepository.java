@@ -34,13 +34,13 @@ interface ExpenseQueryRepository extends Repository<Expense,Long> {
 
     @Query("SELECT NEW com.starwacki.budgettracker.expense.ExpenseDTO(e.id,e.name,e.description, e.expenseCategory, e.expenseDate, e.expenseTime,e.moneyValue) " +
             "FROM Expense e " +
-            "WHERE e.username = :username AND MONTH(e.expenseDate) = :month " +
+            "WHERE e.username = :username AND MONTH(e.expenseDate) = :month AND YEAR(e.expenseDate) = :year " +
             "ORDER BY e.expenseDate DESC, e.expenseTime DESC")
-    List<ExpenseDTO> findAllMonthExpenses(String username, int month);
+    List<ExpenseDTO> findAllMonthExpensesInGivenYear(String username, int month, int year);
 
     @Query("SELECT NEW com.starwacki.budgettracker.expense.ExpenseDTO(e.id,e.name,e.description, e.expenseCategory, e.expenseDate, e.expenseTime,e.moneyValue) " +
             "FROM Expense e " +
-            "WHERE e.username = :username AND FUNCTION('YEAR', e.expenseDate) = :year " +
+            "WHERE e.username = :username AND YEAR(e.expenseDate) = :year " +
             "ORDER BY e.expenseDate DESC, e.expenseTime DESC")
     List<ExpenseDTO> findAllYearExpenses(String username, int year);
 
