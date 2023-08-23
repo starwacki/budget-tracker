@@ -90,14 +90,15 @@ interface PieChartOperations {
     //TODO: CHANGE ONLY TO CURRENT YEAR!!
     @Operation(
             description =
-                    "This operation return pie chart of user expenses by given month . If username doesn't exist in database or " +
-                    "user doesn't have any expenses in this month return empty pie chart. In this pie chart, chart segments are expense categories, " +
+                    "This operation return pie chart of user expenses by given month in given year. If username doesn't exist in database or " +
+                    "user doesn't have any expenses in this month in given year return empty pie chart. In this pie chart, chart segments are expense categories, " +
                     "(App expense categories and user own categories) like: FOOD, HOME, CAR... ",
             summary =
                     "Get user month expenses pie chart",
             parameters = {
                     @Parameter(name = "username",description = "User username",example = "Username1",in = ParameterIn.PATH),
-                    @Parameter(name = "month",description = "Month ordinal - value between 1 and 12", example = "11",in = ParameterIn.PATH)
+                    @Parameter(name = "month",description = "Month ordinal - value between 1 and 12", example = "11",in = ParameterIn.QUERY),
+                    @Parameter(name = "year",description = "Year - value between 2000 and 2050",example = "2020",in = ParameterIn.QUERY)
             },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Pie chart fetched successively.",
@@ -118,12 +119,15 @@ interface PieChartOperations {
                                                     "  \"timestamp\": \"2023-08-22T12:09:33.404+00:00\",\n" +
                                                     "  \"status\": 400,\n" +
                                                     "  \"error\": \"Bad Request\",\n" +
-                                                    "  \"path\": \"/piechart/v1/Username1/month-chart/13\"\n" +
+                                                    "  \"path\": \"/piechart/v1/Username1/month-chart?month=13&year=2020\"\n" +
                                                     "}"
                                     )}))            }
     )
-    @GetMapping(value = "/{username}/month-chart/{month}")
-    ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(@PathVariable String username, @PathVariable @Min(value = 1) @Max(value = 12) int month);
+    @GetMapping(value = "/{username}/month-chart")
+    ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(
+            @PathVariable String username,
+            @RequestParam @Min(value = 1) @Max(value = 12) int month,
+            @RequestParam @Min(value = 2000) @Max(value = 2050) int year);
 
     @Operation(
             description =
@@ -160,7 +164,10 @@ interface PieChartOperations {
                                     )}))            }
     )
     @GetMapping(value = "/{username}/year-chart/{year}")
-    ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(@PathVariable String username, @PathVariable int year);
+    ResponseEntity<ChartDTO<String>>  getPieChartOfUserYearCategoriesExpenses(
+            @PathVariable String username,
+            @PathVariable int year
+    );
 
     @Operation(
             description =

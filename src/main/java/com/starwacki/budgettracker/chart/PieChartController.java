@@ -24,8 +24,8 @@ public class PieChartController implements PieChartOperations {
     }
 
     @Override
-    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(String username, int month) {
-        return ResponseEntity.ok(chartService.getPieChartOfUserMonthCategoriesExpenses(username,month));
+    public ResponseEntity<ChartDTO<String>>  getPieChartOfUserMonthCategoriesExpenses(String username, int month, int year) {
+        return ResponseEntity.ok(chartService.getPieChartOfUserMonthCategoriesExpenses(username,month, year));
     }
 
     @Override

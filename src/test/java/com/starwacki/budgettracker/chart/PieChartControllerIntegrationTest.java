@@ -178,9 +178,10 @@ class PieChartControllerIntegrationTest {
         //given
         String username = "user_without_any_expense";
         Month month= Month.DECEMBER;
+        int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart?month="+month.getValue()+"&year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -201,9 +202,10 @@ class PieChartControllerIntegrationTest {
         //given
         String username = "john_doe";
         Month month= Month.DECEMBER;
+        int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart?month="+month.getValue()+"&year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 
@@ -224,9 +226,10 @@ class PieChartControllerIntegrationTest {
         //given
         String username = "john_doe";
         Month month= Month.JULY;
+        int year = 2023;
 
         //then
-        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart/"+month.getValue()))
+        mockMvc.perform(get(ENDPOINT_REQUEST_MAPPING+"/v1/"+username+"/month-chart?month="+month.getValue()+"&year="+year))
                 .andExpect(result -> assertThat(result.getResponse().getStatus(),is(HttpStatus.OK.value())))
                 .andExpect(result -> {
 

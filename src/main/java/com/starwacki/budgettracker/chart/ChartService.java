@@ -31,8 +31,8 @@ class ChartService {
         return chartMapper.mapChartToChartDTO(chart);
     }
 
-    ChartDTO<String> getPieChartOfUserMonthCategoriesExpenses(String username, int month) {
-        List<ChartExpense> expenses = chartExpenseQueryRepository.findAllMonthChartExpenses(username,month);
+    ChartDTO<String> getPieChartOfUserMonthCategoriesExpenses(String username, int month, int year) {
+        List<ChartExpense> expenses = chartExpenseQueryRepository.findAllMonthChartExpensesInGivenYear(username,month,year);
         Chart<String> chart = chartFactory.getPieChart(expenses);
         return chartMapper.mapChartToChartDTO(chart);
     }
